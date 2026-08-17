@@ -122,6 +122,141 @@
     gap:16px;
   }
 }
+
+/* Interaktives Kontaktformular */
+.contact-section{background:linear-gradient(180deg,#fff,var(--cream))}
+.contact-form-wrap{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:34px;
+  align-items:start;
+}
+.contact-copy{
+  position:sticky;
+  top:110px;
+}
+.contact-copy h2{margin-bottom:14px}
+.contact-copy p{color:var(--muted)}
+.contact-note{
+  margin-top:24px;
+  padding:18px;
+  border-radius:18px;
+  background:rgba(30,61,30,.05);
+  border:1px solid rgba(30,61,30,.1);
+}
+.contact-note strong{display:block;color:var(--deep);margin-bottom:6px}
+.contact-form-card{
+  background:#fff;
+  border:1px solid rgba(30,61,30,.1);
+  border-radius:26px;
+  padding:clamp(22px,4vw,38px);
+  box-shadow:0 18px 48px rgba(30,61,30,.08);
+}
+.person-type{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:24px;
+}
+.person-type input{position:absolute;opacity:0;pointer-events:none}
+.person-type label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:52px;
+  border-radius:14px;
+  border:1px solid rgba(30,61,30,.18);
+  background:var(--cream);
+  color:var(--deep);
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.person-type input:checked + label{
+  background:var(--deep);
+  color:#fff;
+  border-color:var(--deep);
+  box-shadow:0 8px 22px rgba(30,61,30,.16);
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.form-field{display:flex;flex-direction:column;gap:7px}
+.form-field.full{grid-column:1/-1}
+.form-field label{
+  font-weight:700;
+  color:var(--deep);
+  font-size:.95rem;
+}
+.form-field .optional{
+  color:var(--muted);
+  font-weight:500;
+  font-size:.82rem;
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%;
+  border:1px solid rgba(30,61,30,.18);
+  border-radius:14px;
+  padding:13px 14px;
+  background:#fff;
+  color:#243424;
+  font:inherit;
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.form-field textarea{min-height:160px;resize:vertical}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 4px rgba(212,175,55,.13);
+  background:#fffefa;
+}
+.form-field input:invalid:not(:placeholder-shown),
+.form-field textarea:invalid:not(:placeholder-shown){
+  border-color:#b85050;
+}
+.company-field[hidden]{display:none!important}
+.form-privacy{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin:22px 0;
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.5;
+}
+.form-privacy input{margin-top:4px}
+.form-privacy a{color:var(--deep);text-decoration-color:var(--gold)}
+.form-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.form-status{
+  min-height:24px;
+  color:var(--deep);
+  font-size:.92rem;
+}
+.required-note{
+  margin:0 0 20px;
+  color:var(--muted);
+  font-size:.85rem;
+}
+@media(max-width:900px){
+  .contact-form-wrap{grid-template-columns:1fr}
+  .contact-copy{position:static}
+}
+@media(max-width:650px){
+  .form-grid{grid-template-columns:1fr}
+  .person-type{grid-template-columns:1fr 1fr}
+  .contact-form-card{border-radius:20px;padding:20px 16px}
+}
 </style>
 </head>
 <body>
@@ -291,14 +426,85 @@
 </div>
 </section>
 <section class="section contact-section" id="kontakt">
-<div class="container contact-grid">
-<div><p class="eyebrow">Kontakt</p><h2>Fragen zum Jubiläum?</h2><p>Die Kontaktdaten des Festausschusses und die Social-Media-Kanäle werden hier ergänzt.</p></div>
-<div class="contact-card"><strong>750 Jahre Melkendorf</strong><p>04.–06. Juni 2027</p><a href="mailto:info@750melkendorf.de">info@750melkendorf.de</a><small>Beispieladresse – vor Veröffentlichung ersetzen</small></div>
+<div class="container contact-form-wrap">
+<div class="contact-copy">
+<p class="eyebrow">Kontakt</p>
+<h2>Schreib uns direkt.</h2>
+<p>Ob Frage zum Fest, Hinweis, Zusammenarbeit oder allgemeines Anliegen – über das Formular kannst du den Festausschuss direkt kontaktieren.</p>
+<div class="contact-note">
+<strong>750 Jahre Melkendorf</strong>
+<span>04.–06. Juni 2027</span><br/>
+<a href="mailto:info@melkendorf-feiert.de">info@melkendorf-feiert.de</a>
+</div>
+</div>
+<div class="contact-form-card">
+<form action="https://forms.formward.eu/f/164fe65a-a85e-42e8-abb9-f5478083f50f" id="contactForm" method="POST" novalidate="">
+<div aria-label="Art der Anfrage" class="person-type" role="radiogroup">
+<input checked="" id="typePrivate" name="anfragetyp" type="radio" value="privat"/>
+<label for="typePrivate">Privatperson</label>
+<input id="typeCompany" name="anfragetyp" type="radio" value="firma"/>
+<label for="typeCompany">Firma / Organisation</label>
+</div>
+<p class="required-note">Mit * gekennzeichnete Felder sind Pflichtfelder.</p>
+<div class="form-grid">
+<div class="form-field full company-field" hidden="" id="companyField">
+<label for="company">Firma / Organisation *</label>
+<input autocomplete="organization" id="company" name="firma" placeholder="Name der Firma oder Organisation" type="text"/>
+</div>
+<div class="form-field">
+<label for="salutation">Anrede *</label>
+<select id="salutation" name="anrede" required="">
+<option value="">Bitte wählen</option>
+<option>Frau</option>
+<option>Herr</option>
+<option>Divers</option>
+<option>Keine Angabe</option>
+</select>
+</div>
+<div class="form-field">
+<label for="title">Titel <span class="optional">optional</span></label>
+<input autocomplete="honorific-prefix" id="title" name="titel" placeholder="z. B. Dr." type="text"/>
+</div>
+<div class="form-field">
+<label for="firstName">Vorname *</label>
+<input autocomplete="given-name" id="firstName" name="vorname" placeholder="Vorname" required="" type="text"/>
+</div>
+<div class="form-field">
+<label for="lastName">Nachname *</label>
+<input autocomplete="family-name" id="lastName" name="nachname" placeholder="Nachname" required="" type="text"/>
+</div>
+<div class="form-field">
+<label for="email">E-Mail *</label>
+<input autocomplete="email" id="email" name="email" placeholder="name@beispiel.de" required="" type="email"/>
+</div>
+<div class="form-field">
+<label for="phone">Telefon <span class="optional">optional</span></label>
+<input autocomplete="tel" id="phone" name="telefon" placeholder="+49 ..." type="tel"/>
+</div>
+<div class="form-field full">
+<label for="subject">Betreff *</label>
+<input id="subject" name="betreff" placeholder="Worum geht es?" required="" type="text"/>
+</div>
+<div class="form-field full">
+<label for="message">Nachricht *</label>
+<textarea id="message" name="nachricht" placeholder="Deine Nachricht an den Festausschuss ..." required=""></textarea>
+</div>
+</div>
+<label class="form-privacy">
+<input id="privacy" name="datenschutz" required="" type="checkbox" value="zugestimmt"/>
+<span>Ich habe die <a href="/datenschutz.html" rel="noopener" target="_blank">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. *</span>
+</label>
+<div class="form-actions">
+<button class="btn" type="submit">Nachricht senden</button>
+<span aria-live="polite" class="form-status" id="formStatus"></span>
+</div>
+</form>
+</div>
 </div>
 </section>
 </main>
 <footer class="site-footer">
-<div class="container footer-grid"><div><strong>750 Jahre Melkendorf</strong><p>Drei Tage. Ein Dorf. Unzählige Erinnerungen.</p></div><div><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a><a aria-label="Instagram öffnen" class="footer-app-icon" href="#" title="Instagram"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></a><a aria-label="Facebook öffnen" class="footer-app-icon" href="#" title="Facebook"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.75l.41-3H13.5V9.08c0-.87.24-1.46 1.58-1.46H16.8V4.94a22.7 22.7 0 0 0-2.46-.13c-2.43 0-4.09 1.48-4.09 4.2V11H7.5v3h2.75v8h3.25Z"></path></svg></a></div></div>
+<div class="container footer-grid"><div><strong>750 Jahre Melkendorf</strong><p>Drei Tage. Ein Dorf. Unzählige Erinnerungen.</p></div><div><a href="#">Impressum</a><a href="#">Datenschutz</a><a aria-label="Instagram öffnen" class="footer-app-icon" href="#" title="Instagram"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></a><a aria-label="Facebook öffnen" class="footer-app-icon" href="#" title="Facebook"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.75l.41-3H13.5V9.08c0-.87.24-1.46 1.58-1.46H16.8V4.94a22.7 22.7 0 0 0-2.46-.13c-2.43 0-4.09 1.48-4.09 4.2V11H7.5v3h2.75v8h3.25Z"></path></svg></a></div></div>
 </footer>
 <script>
 const toggle=document.querySelector('.nav-toggle');
@@ -322,5 +528,71 @@ if(cd){
 }
 
 </script>
-</body>
+<script>
+(() => {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const privateRadio = document.getElementById('typePrivate');
+  const companyRadio = document.getElementById('typeCompany');
+  const companyWrap = document.getElementById('companyField');
+  const companyInput = document.getElementById('company');
+  const status = document.getElementById('formStatus');
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  function updateType() {
+    const isCompany = companyRadio.checked;
+    companyWrap.hidden = !isCompany;
+    companyInput.required = isCompany;
+    if (!isCompany) companyInput.value = '';
+  }
+
+  privateRadio.addEventListener('change', updateType);
+  companyRadio.addEventListener('change', updateType);
+  updateType();
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    status.textContent = '';
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      status.textContent = 'Bitte prüfe die markierten Pflichtfelder.';
+      return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Wird gesendet …';
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Übermittlung fehlgeschlagen');
+      }
+
+      form.reset();
+      privateRadio.checked = true;
+      updateType();
+
+      status.textContent = 'Vielen Dank! Deine Nachricht wurde erfolgreich an den Festausschuss übermittelt.';
+      status.style.color = 'var(--deep)';
+    } catch (error) {
+      status.textContent = 'Leider konnte die Nachricht nicht gesendet werden. Bitte versuche es später erneut oder schreibe an info@melkendorf-feiert.de.';
+      status.style.color = '#9b2f2f';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Nachricht senden';
+    }
+  });
+})();
+</script></body>
 </html>
