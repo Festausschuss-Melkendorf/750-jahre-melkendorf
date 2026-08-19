@@ -257,6 +257,81 @@
   .person-type{grid-template-columns:1fr 1fr}
   .contact-form-card{border-radius:20px;padding:20px 16px}
 }
+
+/* ===== Startseite: Dorfarchiv / Damals & Heute ===== */
+.archive-home{
+  padding:96px 0;
+  background:
+    radial-gradient(circle at 88% 15%,rgba(212,175,55,.17),transparent 25%),
+    linear-gradient(180deg,#fff,var(--cream));
+}
+.archive-home-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:52px;
+  align-items:center;
+}
+.archive-visual{
+  min-height:440px;
+  border-radius:28px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(30,61,30,.13),rgba(212,175,55,.22)),
+    var(--pale);
+  border:1px solid rgba(30,61,30,.1);
+  box-shadow:var(--shadow);
+}
+.archive-visual:before{
+  content:"Damals";
+  position:absolute;left:24px;top:24px;
+  background:#fff;color:var(--deep);padding:9px 15px;
+  border-radius:999px;font-weight:800;font-size:.82rem;z-index:2
+}
+.archive-visual:after{
+  content:"Heute";
+  position:absolute;right:24px;bottom:24px;
+  background:var(--deep);color:#fff;padding:9px 15px;
+  border-radius:999px;font-weight:800;font-size:.82rem;z-index:2
+}
+.archive-divider{
+  position:absolute;left:50%;top:-10%;height:120%;width:2px;
+  background:rgba(255,255,255,.75);transform:rotate(10deg);
+}
+.archive-years{
+  position:absolute;inset:0;display:grid;place-items:center;
+  text-align:center;padding:42px
+}
+.archive-years strong{
+  display:block;font-family:Georgia,"Times New Roman",serif;
+  color:rgba(30,61,30,.22);font-size:clamp(4rem,8vw,7rem);line-height:.9
+}
+.archive-years span{
+  display:block;margin-top:18px;color:var(--deep);font-weight:800
+}
+.archive-copy h2{
+  font-family:Georgia,"Times New Roman",serif;
+  color:var(--deep);font-size:clamp(2.3rem,4.5vw,4rem);
+  line-height:1.05;margin:0 0 20px
+}
+.archive-copy p{color:var(--muted);line-height:1.75}
+.archive-features{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0
+}
+.archive-feature{
+  padding:17px;border-radius:16px;background:#fff;
+  border:1px solid rgba(30,61,30,.09)
+}
+.archive-feature strong{display:block;color:var(--deep);margin-bottom:5px}
+.archive-feature span{color:var(--muted);font-size:.87rem;line-height:1.4}
+.archive-actions{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){
+  .archive-home-grid{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .archive-features{grid-template-columns:1fr}
+  .archive-visual{min-height:330px}
+}
 </style>
 </head>
 <body>
@@ -339,6 +414,34 @@
 </div>
 </div>
 </section>
+<section class="archive-home" id="dorfarchiv">
+<div class="container archive-home-grid">
+<div aria-label="Platzhalter für Damals-und-Heute-Bildvergleich" class="archive-visual">
+<div class="archive-divider"></div>
+<div class="archive-years">
+<div>
+<strong>1277<br/>2027</strong>
+<span>Hier entsteht später unser interaktiver Damals-&amp;-Heute-Bildvergleich.</span>
+</div>
+</div>
+</div>
+<div class="archive-copy">
+<p class="eyebrow">Dorfarchiv · Damals &amp; Heute</p>
+<h2>Erinnerungen bewahren. Geschichte sichtbar machen.</h2>
+<p>Alte Fotoalben, Dokumente und persönliche Geschichten erzählen Melkendorf auf eine Weise, die kein Geschichtsbuch ersetzen kann. Deshalb entsteht rund um das Jubiläum ein digitales Dorfarchiv.</p>
+<p>Bürgerinnen und Bürger können historische und aktuelle Bilder, Dokumente, Zeitungsartikel oder Erinnerungen einreichen. Jeder Beitrag wird vor einer möglichen Veröffentlichung geprüft.</p>
+<div class="archive-features">
+<div class="archive-feature"><strong>Damals &amp; Heute</strong><span>Historische Ansichten später direkt mit heutigen Aufnahmen vergleichen.</span></div>
+<div class="archive-feature"><strong>Aus der Bevölkerung</strong><span>Bilder, Dokumente und Geschichten gemeinsam zusammentragen.</span></div>
+</div>
+<div class="archive-actions">
+<a class="btn" href="/dorfarchiv.html">Bilder &amp; Geschichten einreichen</a>
+<a class="btn btn-secondary" href="/dorfarchiv.html">Mehr zum Dorfarchiv</a>
+</div>
+</div>
+</div>
+</section>
+
 <section class="section info-section" id="besucherinfos">
 <div class="container">
 <div class="section-heading"><p class="eyebrow">Gut vorbereitet</p><h2>Besucherinformationen</h2><p>Alles Wichtige für einen entspannten Festbesuch – kompakt und mobil gut lesbar.</p></div>
