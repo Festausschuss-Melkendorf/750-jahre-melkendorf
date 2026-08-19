@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://750-jahre-melkendorf.de/sitemap.xml
