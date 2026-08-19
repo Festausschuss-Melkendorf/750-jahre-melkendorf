@@ -387,6 +387,76 @@ body{overflow-x:clip}
   .footer-grid > div:last-child{width:100%;justify-content:flex-start!important;flex-wrap:wrap!important}
 }
 @media (max-width: 380px){.container{width:min(100% - 18px,760px)!important}.hero h1{font-size:2.05rem!important}}
+
+/* ===== Unterseiten-Menü ===== */
+.subpage-menu{
+  position:relative;
+  z-index:120;
+}
+.subpage-menu summary{
+  list-style:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:10px 15px;
+  border-radius:999px;
+  border:1px solid rgba(30,61,30,.14);
+  background:#fff;
+  color:var(--deep);
+  font-weight:800;
+  cursor:pointer;
+  user-select:none;
+}
+.subpage-menu summary::-webkit-details-marker{display:none}
+.subpage-menu summary::after{
+  content:"⌄";
+  font-size:.95em;
+  transition:transform .2s ease;
+}
+.subpage-menu[open] summary::after{transform:rotate(180deg)}
+.subpage-menu nav{
+  position:absolute;
+  right:0;
+  top:calc(100% + 10px);
+  width:min(280px,calc(100vw - 28px));
+  padding:10px;
+  border:1px solid rgba(30,61,30,.10);
+  border-radius:18px;
+  background:#fff;
+  box-shadow:0 18px 44px rgba(30,61,30,.14);
+  display:grid;
+  gap:4px;
+}
+.subpage-menu nav a{
+  display:block;
+  padding:11px 12px;
+  border-radius:11px;
+  text-decoration:none;
+  color:var(--deep);
+  font-weight:700;
+}
+.subpage-menu nav a:hover,
+.subpage-menu nav a:focus{
+  background:var(--cream);
+}
+@media(max-width:767px){
+  .subpage-menu summary{
+    min-height:40px;
+    padding:9px 12px;
+    font-size:.88rem;
+  }
+  .subpage-menu nav{
+    position:fixed;
+    left:12px;
+    right:12px;
+    top:76px;
+    width:auto;
+    max-height:calc(100dvh - 96px);
+    overflow:auto;
+  }
+}
 </style>
 </head>
 <body>
@@ -396,8 +466,20 @@ body{overflow-x:clip}
 <span class="brand-mark">750</span>
 <span><strong>Jahre Melkendorf</strong><small>4.–6. Juni 2027</small></span>
 </a>
-<a class="btn btn-secondary" href="/">Zur Startseite</a>
-</div>
+
+<details class="subpage-menu">
+<summary>Menü</summary>
+<nav aria-label="Seitennavigation">
+<a href="/">Startseite</a>
+<a href="/#programm">Programm</a>
+<a href="/#geschichte">Geschichte</a>
+<a href="/dorfarchiv.html">Dorfarchiv</a>
+<a href="/#besucherinfos">Besucherinfos</a>
+<a href="/#vereine">Vereine</a>
+<a href="/#aktuelles">Aktuelles</a>
+<a href="/#kontakt">Kontakt</a>
+</nav>
+</details></div>
 </header>
 <main>
 <section class="hero">
