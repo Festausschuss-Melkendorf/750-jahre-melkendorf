@@ -318,6 +318,81 @@ textarea{
   .field{gap:9px}
   .form-grid{gap:20px}
 }
+
+/* ===== Responsive-Finalisierung 19.08.2026 ===== */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+.container{width:min(1180px,calc(100% - 40px));margin-inline:auto}
+
+@media (min-width:1400px){
+  .container{width:min(1240px,calc(100% - 64px))}
+}
+
+@media (max-width:900px){
+  .container{width:min(100% - 28px,760px)}
+  h1{font-size:clamp(2.35rem,8vw,4rem)!important}
+  h2{font-size:clamp(1.9rem,6vw,3rem)!important}
+  h3{font-size:clamp(1.25rem,4.5vw,1.8rem)!important}
+  p,li{line-height:1.65}
+  .site-header{position:sticky;top:0;z-index:100}
+}
+
+@media (max-width:640px){
+  .container{width:calc(100% - 24px)}
+  body{font-size:16px}
+  .btn,.btn-small,.nav-cta{
+    min-height:46px;
+    padding:12px 16px!important;
+    font-size:.95rem!important;
+  }
+  .site-footer{padding-left:0;padding-right:0}
+}
+
+@media (max-width:390px){
+  .container{width:calc(100% - 18px)}
+}
+
+/* Dorfarchiv: Desktop + Mobile */
+@media (max-width:900px){
+  .hero-grid,.intro-grid{grid-template-columns:1fr!important;gap:30px!important}
+  .hero{padding:54px 0 42px!important}
+  .hero-card{order:2}
+  .form-card{padding:26px 22px!important}
+  .type-grid,.topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .form-grid{grid-template-columns:1fr 1fr!important}
+  .period-wrap{grid-template-columns:1fr!important;gap:10px!important}
+  .footer-grid{flex-direction:column!important;align-items:flex-start!important}
+}
+@media (max-width:640px){
+  .nav-wrap{min-height:68px!important;gap:10px!important}
+  .brand-mark{width:42px!important;height:42px!important}
+  .brand small{display:none!important}
+  .hero{padding:38px 0!important}
+  .hero-card{padding:22px 18px!important}
+  .process-step{grid-template-columns:40px 1fr!important}
+  .intro-copy{padding:22px 18px!important}
+  .form-card{padding:22px 15px!important;border-radius:20px!important}
+  .stepbar{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    padding-bottom:6px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .step-pill{white-space:nowrap;flex:0 0 auto}
+  .type-grid,.topic-grid,.form-grid{grid-template-columns:1fr!important}
+  .choice label{min-height:56px!important}
+  input,select,textarea{font-size:16px!important}
+  .upload-box{padding:24px 14px!important}
+  .rights{padding:18px 15px!important}
+  .submit-row{display:grid!important;grid-template-columns:1fr!important}
+  .submit-row .btn{width:100%}
+  .footer-grid > div:last-child{
+    width:100%;
+    display:flex!important;
+    flex-wrap:wrap!important;
+  }
+}
 </style>
 </head>
 <body>
