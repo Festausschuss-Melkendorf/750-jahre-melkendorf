@@ -405,6 +405,399 @@ body{overflow-x:clip}
   .quicklinks-grid{grid-template-columns:1fr!important}
   .quicklinks a:nth-child(odd){border-right:0!important}
 }
+
+/* ===== Interaktive Anreise / Google Maps ===== */
+#besucherinfos .info-grid.is-hidden{
+  display:none !important;
+}
+
+.travel-map-panel{
+  display:none;
+  margin-top:28px;
+  border-radius:24px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(30,61,30,.10);
+  box-shadow:0 18px 48px rgba(30,61,30,.10);
+}
+
+.travel-map-panel.is-visible{
+  display:block;
+  animation:travelFadeIn .28s ease;
+}
+
+@keyframes travelFadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+.travel-map-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  padding:22px 24px;
+  background:linear-gradient(135deg,#eef3e7,#fff9ea);
+  border-bottom:1px solid rgba(30,61,30,.08);
+}
+
+.travel-map-toolbar h3{
+  margin:0 0 5px;
+  color:var(--deep);
+  font-size:1.45rem;
+}
+
+.travel-map-toolbar p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.travel-map-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.travel-map-close,
+.travel-map-route{
+  min-height:42px;
+  padding:10px 15px;
+  border-radius:999px;
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.travel-map-close{
+  border:1px solid rgba(30,61,30,.15);
+  background:#fff;
+  color:var(--deep);
+}
+
+.travel-map-route{
+  border:1px solid var(--deep);
+  background:var(--deep);
+  color:#fff;
+}
+
+.travel-map-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 8.5;
+  min-height:420px;
+  background:#e8eee1;
+}
+
+.travel-map-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+#travel-card{
+  cursor:pointer;
+}
+
+#travel-card:focus-within,
+#travel-card:hover{
+  transform:translateY(-2px);
+}
+
+#travel-card .travel-open{
+  cursor:pointer;
+}
+
+@media(max-width:767px){
+  .travel-map-panel{
+    margin-top:18px;
+    border-radius:18px;
+  }
+
+  .travel-map-toolbar{
+    flex-direction:column;
+    align-items:stretch;
+    padding:18px 16px;
+  }
+
+  .travel-map-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+  }
+
+  .travel-map-close,
+  .travel-map-route{
+    width:100%;
+  }
+
+  .travel-map-wrap{
+    aspect-ratio:auto;
+    min-height:62vh;
+  }
+}
+
+/* ===== Anreise V7: Festgelände + Infos + 2-Klick-Google-Maps ===== */
+.travel-location-card{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:18px;
+  padding:20px 24px 0;
+}
+.travel-location-main,
+.travel-status-grid{
+  min-width:0;
+}
+.travel-location-main{
+  padding:20px;
+  border-radius:18px;
+  background:linear-gradient(145deg,#eef3e7,#fff);
+  border:1px solid rgba(30,61,30,.09);
+}
+.travel-location-main .location-label{
+  display:inline-block;
+  margin-bottom:8px;
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.74rem;
+  font-weight:800;
+}
+.travel-location-main h4{
+  margin:0 0 8px;
+  color:var(--deep);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.45rem;
+}
+.travel-location-main p{
+  margin:0;
+  color:var(--muted);
+  line-height:1.55;
+}
+.travel-status-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.travel-status{
+  padding:14px 15px;
+  border-radius:15px;
+  background:#fff;
+  border:1px solid rgba(30,61,30,.09);
+}
+.travel-status strong{
+  display:block;
+  margin-bottom:4px;
+  color:var(--deep);
+  font-size:.92rem;
+}
+.travel-status span{
+  color:var(--muted);
+  font-size:.84rem;
+  line-height:1.4;
+}
+.travel-status .badge{
+  display:inline-flex;
+  width:auto;
+  margin-top:7px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:#fff8dd;
+  color:#7b6110;
+  font-size:.72rem;
+  font-weight:800;
+}
+.travel-status .badge.info{
+  background:#eef3e7;
+  color:var(--forest);
+}
+.map-consent{
+  min-height:420px;
+  display:grid;
+  place-items:center;
+  padding:30px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(212,175,55,.14),transparent 25%),
+    linear-gradient(145deg,#eef3e7,#f7f5ee);
+}
+.map-consent-card{
+  width:min(650px,100%);
+  padding:28px;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid rgba(30,61,30,.10);
+  box-shadow:0 16px 40px rgba(30,61,30,.08);
+}
+.map-consent-icon{
+  width:58px;
+  height:58px;
+  margin:0 auto 15px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(212,175,55,.16);
+  color:var(--deep);
+  font-size:1.5rem;
+}
+.map-consent-card h4{
+  margin:0 0 9px;
+  color:var(--deep);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:1.45rem;
+}
+.map-consent-card p{
+  margin:0 auto 18px;
+  max-width:560px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.map-consent-card a{
+  color:var(--deep);
+  text-decoration-color:var(--gold);
+}
+.map-consent-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.map-consent-load{
+  min-height:44px;
+  padding:11px 17px;
+  border:0;
+  border-radius:999px;
+  background:var(--deep);
+  color:#fff;
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+}
+.map-consent-route{
+  min-height:44px;
+  padding:11px 17px;
+  border-radius:999px;
+  border:1px solid rgba(30,61,30,.15);
+  background:#fff;
+  color:var(--deep);
+  font-weight:800;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.travel-map-wrap iframe{display:none}
+.travel-map-wrap.map-loaded iframe{display:block}
+.travel-map-wrap.map-loaded .map-consent{display:none}
+
+@media(max-width:900px){
+  .travel-location-card{grid-template-columns:1fr}
+}
+@media(max-width:767px){
+  .travel-location-card{padding:16px 14px 0}
+  .travel-status-grid{grid-template-columns:1fr}
+  .travel-location-main{padding:17px}
+  .map-consent{min-height:55vh;padding:18px 14px}
+  .map-consent-card{padding:22px 16px}
+  .map-consent-actions{display:grid;grid-template-columns:1fr}
+  .map-consent-load,.map-consent-route{width:100%}
+}
+
+/* ===== Anreise V8: Karte direkt im Festgelände-Feld ===== */
+.travel-location-card{
+  align-items:stretch;
+}
+
+.travel-location-main{
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
+.travel-location-main .travel-map-wrap{
+  position:relative;
+  width:100%;
+  margin-top:18px;
+  aspect-ratio:4 / 3;
+  min-height:310px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(30,61,30,.10);
+  background:#e8eee1;
+}
+
+.travel-location-main .travel-map-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+.travel-location-main .map-consent{
+  min-height:100%;
+  height:100%;
+  padding:20px;
+}
+
+.travel-location-main .map-consent-card{
+  width:min(440px,100%);
+  padding:22px;
+}
+
+.travel-location-main .map-consent-icon{
+  width:50px;
+  height:50px;
+  font-size:1.25rem;
+}
+
+.travel-location-main .map-consent-card h4{
+  font-size:1.25rem;
+}
+
+.travel-location-main .map-consent-card p{
+  font-size:.9rem;
+  line-height:1.5;
+}
+
+.travel-location-main .map-consent-actions{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+
+.travel-location-main .map-consent-load,
+.travel-location-main .map-consent-route{
+  width:100%;
+}
+
+#travel-map-panel > .travel-map-wrap{
+  display:none !important;
+}
+
+@media(max-width:900px){
+  .travel-location-main .travel-map-wrap{
+    min-height:360px;
+    aspect-ratio:16 / 10;
+  }
+}
+
+@media(max-width:767px){
+  .travel-location-main .travel-map-wrap{
+    min-height:320px;
+    aspect-ratio:auto;
+  }
+  .travel-location-main .map-consent{
+    min-height:320px;
+  }
+}
 </style>
 </head>
 <body>
@@ -518,10 +911,89 @@ body{overflow-x:clip}
 <div class="container">
 <div class="section-heading"><p class="eyebrow">Gut vorbereitet</p><h2>Besucherinformationen</h2><p>Alles Wichtige für einen entspannten Festbesuch – kompakt und mobil gut lesbar.</p></div>
 <div class="info-grid">
-<article><span>⌖</span><h3>Anreise &amp; Parken</h3><p>Anfahrtswege, Parkflächen und mögliche Shuttle-Angebote.</p><a href="#">Mehr erfahren</a></article>
+<article aria-controls="travel-map-panel" aria-expanded="false" id="travel-card" role="button" tabindex="0"><span>⌖</span><h3>Anreise &amp; Parken</h3><p>Direkte Routenplanung nach Melkendorf sowie Hinweise zu Parkflächen und Anfahrt.</p><a class="travel-open" href="#travel-map-panel">Karte anzeigen</a></article>
 <article><span>▦</span><h3>Lageplan</h3><p>Festgelände, Bühnen, Toiletten, Gastronomie und Erste Hilfe.</p><a href="#">Plan folgt</a></article>
 <article id="essen"><span>♨</span><h3>Essen &amp; Getränke</h3><p>Speisen, Getränkekarte, Öffnungszeiten und Hinweise.</p><a href="#">Karte folgt</a></article>
 <article><span>?</span><h3>FAQ</h3><p>Antworten zu Barrierefreiheit, Wetter, Bezahlung und mehr.</p><a href="#">Fragen ansehen</a></article>
+</div><div aria-hidden="true" class="travel-map-panel" id="travel-map-panel">
+<div class="travel-map-toolbar">
+<div>
+<p class="eyebrow">Anreise nach Melkendorf</p>
+<h3>Anreise zum Festgelände</h3>
+<p>Festgelände: Sportanlage Melkendorf am Flußweg.</p>
+</div>
+<div class="travel-map-actions">
+<button class="travel-map-close" id="travel-map-close" type="button">← Zurück zu Besucherinfos</button>
+<a class="travel-map-route" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sportanlage+Melkendorf%2C+Flu%C3%9Fweg%2C+96123+Melkendorf" rel="noopener noreferrer" target="_blank">Route planen ↗</a>
+</div>
+</div><div class="travel-location-card">
+<div class="travel-location-main">
+<span class="location-label">Festgelände</span>
+<h4>Sportanlage Melkendorf</h4>
+<p>Flußweg · 96123 Melkendorf / Litzendorf</p>
+<div class="travel-map-wrap"><div class="map-consent">
+<div class="map-consent-card">
+<div class="map-consent-icon">⌖</div>
+<h4>Google Maps laden?</h4>
+<p>
+      Die interaktive Karte wird erst nach deiner Zustimmung von Google geladen.
+      Dabei können Daten – insbesondere deine IP-Adresse und technische Informationen –
+      an Google übertragen und dort verarbeitet werden.
+      Weitere Informationen findest du in unserer <a href="/datenschutz.html#section-10">Datenschutzerklärung</a>.
+    </p>
+<div class="map-consent-actions">
+<button class="map-consent-load" id="map-consent-load" type="button">Google Maps laden</button>
+<a class="map-consent-route" href="https://www.google.com/maps/dir/?api=1&amp;destination=Sportanlage+Melkendorf%2C+Flu%C3%9Fweg%2C+96123+Melkendorf" rel="noopener noreferrer" target="_blank">Route extern öffnen ↗</a>
+</div>
+</div>
+</div>
+<iframe allowfullscreen="" data-src="https://www.google.com/maps?q=Sportanlage+Melkendorf%2C+Flu%C3%9Fweg%2C+96123+Melkendorf&amp;z=16&amp;output=embed" id="travel-map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps – Melkendorf">
+</iframe>
+</div></div>
+<div class="travel-status-grid">
+<div class="travel-status">
+<strong>Parkplätze</strong>
+<span>Die genaue Ausweisung der Parkflächen wird derzeit geplant.</span>
+<span class="badge">In Planung</span>
+</div>
+<div class="travel-status">
+<strong>Barrierefreie Parkplätze</strong>
+<span>Standorte und Anzahl werden noch abgestimmt.</span>
+<span class="badge">In Klärung</span>
+</div>
+<div class="travel-status">
+<strong>Fahrradstellplätze</strong>
+<span>Ein geeigneter Bereich soll noch festgelegt werden.</span>
+<span class="badge">In Planung</span>
+</div>
+<div class="travel-status">
+<strong>ÖPNV</strong>
+<span>In Melkendorf gibt es zwei Bushaltestellen: an der Hauptstraße und an der Otterbachstraße.</span>
+<span class="badge info">Vorhanden</span>
+</div>
+<div class="travel-status">
+<strong>Verkehrsführung / Sperrungen</strong>
+<span>Mögliche Regelungen werden aktuell abgestimmt.</span>
+<span class="badge">In Klärung</span>
+</div>
+<div class="travel-status">
+<strong>Haupteingang</strong>
+<span>Der genaue Zugang zum Festgelände wird noch festgelegt.</span>
+<span class="badge">In Klärung</span>
+</div>
+<div class="travel-status">
+<strong>Shuttle / Bring- &amp; Abholzone</strong>
+<span>Ob es eine gesonderte Lösung geben wird, ist noch offen.</span>
+<span class="badge">In Klärung</span>
+</div>
+<div class="travel-status">
+<strong>Wohnmobile</strong>
+<span>Gesonderte Wohnmobil-Stellplätze sind aktuell nicht vorgesehen.</span>
+<span class="badge info">Aktuell nicht vorgesehen</span>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </section>
@@ -773,5 +1245,47 @@ if(cd){
 <!-- Cloudflare Web Analytics -->
 <script data-cf-beacon='{"token":"998d56353c3848cbbf44826972b6600f"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script>
 <!-- End Cloudflare Web Analytics -->
-</body>
+<script>
+(() => {
+  const section = document.getElementById('besucherinfos');
+  const grid = section?.querySelector('.info-grid');
+  const card = document.getElementById('travel-card');
+  const panel = document.getElementById('travel-map-panel');
+  const close = document.getElementById('travel-map-close');
+  const frame = document.getElementById('travel-map-frame');
+  const wrap = panel?.querySelector('.travel-map-wrap');
+  const consentButton = document.getElementById('map-consent-load');
+
+  if (!section || !grid || !card || !panel || !close || !frame || !wrap || !consentButton) return;
+
+  const openPanel = (event) => {
+    if (event) event.preventDefault();
+    grid.classList.add('is-hidden');
+    panel.classList.add('is-visible');
+    panel.setAttribute('aria-hidden', 'false');
+    card.setAttribute('aria-expanded', 'true');
+    requestAnimationFrame(() => panel.scrollIntoView({behavior:'smooth',block:'start'}));
+  };
+
+  const closePanel = () => {
+    panel.classList.remove('is-visible');
+    panel.setAttribute('aria-hidden', 'true');
+    grid.classList.remove('is-hidden');
+    card.setAttribute('aria-expanded', 'false');
+    requestAnimationFrame(() => section.scrollIntoView({behavior:'smooth',block:'start'}));
+  };
+
+  const loadGoogleMap = () => {
+    if (!frame.src) frame.src = frame.dataset.src;
+    wrap.classList.add('map-loaded');
+  };
+
+  card.addEventListener('click', openPanel);
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') openPanel(event);
+  });
+  close.addEventListener('click', closePanel);
+  consentButton.addEventListener('click', loadGoogleMap);
+})();
+</script></body>
 </html>
