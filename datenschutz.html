@@ -287,49 +287,44 @@
   .footer-links-row{justify-content:flex-start}
 }
 
-/* ===== Adaptive Mobile Layout v3 ===== */
-@media (max-width: 780px){
-  html{width:100%;max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
-  body{width:100%;max-width:100%;overflow-x:hidden;margin:0}
-  *,*::before,*::after{box-sizing:border-box}
-  main,header,footer,section,article,aside,div,form,fieldset{max-width:100%;min-width:0}
-  img,svg,video,canvas{max-width:100%;height:auto}
-  h1,h2,h3,h4,p,li,a,label,strong,span{overflow-wrap:anywhere;word-break:normal;hyphens:auto}
-  input,select,textarea,button{max-width:100%;min-width:0;font-size:16px}
-  .container{width:calc(100% - 28px)!important;max-width:none!important;margin-inline:auto!important}
+/* === Responsive V4: legal pages; desktop sidebar preserved, mobile uses select instead of sideways scrolling === */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip}
+.mobile-quicknav{display:none}
+@media (max-width: 900px){
+  :where(main,section,article,aside,div,nav){min-width:0}
+  .legal-layout{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+  .legal-content{min-width:0!important;width:100%!important;max-width:100%!important}
+  .legal-sidebar{display:none!important}
+  .mobile-quicknav{display:block;position:sticky;top:76px;z-index:35;margin:0 auto 18px;width:min(100% - 28px,760px);padding:11px 12px;border:1px solid rgba(30,61,30,.11);border-radius:15px;background:rgba(247,245,238,.96);backdrop-filter:blur(10px);box-shadow:0 10px 24px rgba(30,61,30,.08)}
+  .mobile-quicknav label{display:block;color:var(--deep);font-weight:800;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 6px}
+  .mobile-quicknav select{width:100%;min-height:44px;border:1px solid rgba(30,61,30,.15);border-radius:11px;background:#fff;color:var(--deep);padding:9px 38px 9px 11px;font:inherit;font-size:.94rem}
 }
-@media (max-width: 400px){
-  .container{width:calc(100% - 20px)!important}
-}
-
-@media (max-width:780px){
-  .site-header{position:sticky!important;top:0!important;z-index:100!important}
-  .nav-wrap{min-height:64px!important;height:auto!important;gap:8px!important;padding:8px 0!important}
-  .brand{min-width:0!important;max-width:70%!important}
+@media (max-width: 600px){
+  .container{width:min(100% - 22px,1160px)!important}
+  .site-header{position:sticky;top:0;z-index:100}
+  .nav-wrap{min-height:66px!important;gap:8px!important}
+  .brand{min-width:0!important;max-width:68%!important}
   .brand-mark{width:38px!important;height:38px!important;flex:0 0 38px!important}
-  .brand strong{font-size:.94rem!important;line-height:1.12!important;white-space:normal!important}
+  .brand strong{font-size:.93rem!important;line-height:1.08!important;overflow-wrap:anywhere}
   .brand small{display:none!important}
-  .btn-small{min-height:38px!important;padding:8px 10px!important;font-size:.78rem!important;white-space:nowrap!important;flex:0 0 auto!important}
-  .legal-hero{padding:32px 0 24px!important;overflow:hidden!important}
-  .legal-hero .eyebrow{font-size:.72rem!important;letter-spacing:.13em!important}
-  .legal-hero h1{font-size:clamp(1.85rem,8.4vw,2.35rem)!important;line-height:1.08!important;max-width:100%!important;margin-bottom:16px!important;overflow-wrap:anywhere!important;hyphens:auto!important}
-  .legal-hero p{font-size:1rem!important;line-height:1.55!important;max-width:100%!important}
-  .draft-notice{padding:14px!important;border-radius:14px!important;max-width:100%!important}
-  .draft-notice strong{font-size:1rem!important}
-  .legal-wrap{padding:22px 0 52px!important;overflow:hidden!important}
-  .legal-layout{display:flex!important;flex-direction:column!important;gap:16px!important;width:100%!important;max-width:100%!important}
-  .legal-sidebar{position:static!important;order:-1!important;width:100%!important;max-width:100%!important;height:auto!important;max-height:none!important;overflow-x:auto!important;overflow-y:hidden!important;display:flex!important;flex-wrap:nowrap!important;gap:7px!important;padding:10px!important;border-radius:15px!important;-webkit-overflow-scrolling:touch!important}
-  .legal-sidebar strong{display:none!important}
-  .legal-sidebar a{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;white-space:nowrap!important;margin:0!important;padding:8px 11px!important;border-radius:999px!important;background:#fff!important;border:1px solid rgba(30,61,30,.1)!important;font-size:.78rem!important;line-height:1.15!important}
-  .legal-content{width:100%!important;max-width:100%!important;min-width:0!important;padding:20px 14px!important;border-radius:17px!important;overflow:hidden!important}
-  .legal-content h2{font-size:1.42rem!important;line-height:1.18!important;margin:34px 0 12px!important;max-width:100%!important;overflow-wrap:anywhere!important;hyphens:auto!important;scroll-margin-top:82px!important}
-  .legal-content h3{font-size:1.08rem!important;line-height:1.25!important;max-width:100%!important}
-  .legal-content p,.legal-content li{font-size:.96rem!important;line-height:1.63!important;max-width:100%!important;overflow-wrap:anywhere!important;hyphens:auto!important}
-  .legal-content ul{padding-left:18px!important}
-  .legal-contact{max-width:100%!important;overflow:hidden!important}
-  .footer-grid{flex-direction:column!important;align-items:flex-start!important;gap:16px!important}
-  .footer-links-row{justify-content:flex-start!important;gap:10px!important;max-width:100%!important}
+  .btn-small{min-height:38px!important;padding:8px 10px!important;font-size:.76rem!important;white-space:nowrap!important;flex:0 0 auto!important}
+  .legal-hero{padding:36px 0 28px!important}
+  .legal-hero h1{font-size:clamp(1.95rem,9.2vw,2.45rem)!important;line-height:1.06!important;overflow-wrap:anywhere!important;word-break:normal!important;hyphens:auto!important;margin-bottom:14px!important}
+  .legal-hero p{font-size:.98rem!important;line-height:1.58!important}
+  .draft-notice{padding:15px!important;border-radius:14px!important}
+  .legal-wrap{padding:22px 0 54px!important}
+  .mobile-quicknav{top:72px;width:min(100% - 22px,760px);margin-bottom:16px;padding:10px}
+  .legal-content{padding:21px 16px!important;border-radius:18px!important;overflow-wrap:anywhere!important}
+  .legal-content h2{font-size:1.43rem!important;line-height:1.17!important;margin:34px 0 12px!important;overflow-wrap:anywhere!important;hyphens:auto!important;scroll-margin-top:148px!important}
+  .legal-content h3{font-size:1.08rem!important;line-height:1.25!important;overflow-wrap:anywhere!important}
+  .legal-content p,.legal-content li,.legal-content a{font-size:.96rem!important;line-height:1.64!important;overflow-wrap:anywhere!important;word-break:normal!important}
+  .legal-content ul{padding-left:19px!important}
+  .legal-contact{padding:15px!important}
+  .footer-grid{flex-direction:column!important;align-items:flex-start!important;gap:18px!important}
+  .footer-links-row{justify-content:flex-start!important;gap:10px!important;flex-wrap:wrap!important}
 }
+@media (max-width: 380px){.container{width:min(100% - 18px,1160px)!important}.mobile-quicknav{width:min(100% - 18px,760px)}}
 </style>
 </head>
 <body>
@@ -350,14 +345,14 @@
 <p>Informationen zur Website des 750-jährigen Jubiläums Melkendorf.</p>
 <div class="draft-notice" role="note">
 <div>
-<strong>Entwurf – Stand 17.08.2026</strong>
+<strong>Entwurf – Stand 19.08.2026</strong>
           Noch nicht durch den Festausschuss „750 Jahre Melkendorf“ abschließend freigegeben.
         </div>
 </div>
 </div>
 </section>
 <section class="legal-wrap">
-<div class="container legal-layout">
+<div class="mobile-quicknav"><label for="legal-quick-select">Schnellwahl</label><select aria-label="Abschnitt auswählen" id="legal-quick-select"><option value="">Abschnitt auswählen …</option><option value="#section-1">1. Verantwortlicher</option><option value="#section-4">2. Allgemeine Hinweise</option><option value="#section-5">3. Bereitstellung der Website und Server-Protokolldaten</option><option value="#section-6">4. Technische Bereitstellung, Hosting und Domains</option><option value="#section-7">4.1 GitHub Pages</option><option value="#section-8">4.2 Cloudflare und Weiterleitungsdomain</option><option value="#section-9">4.3 IONOS</option><option value="#section-10">5. SSL- beziehungsweise TLS-Verschlüsselung</option><option value="#section-11">6. Cookies und ähnliche Technologien</option><option value="#section-12">7. Kontaktaufnahme und Kontaktformular</option><option value="#formward">7.1 Einsatz von Formward</option><option value="#section-13">8. PDF-Dateien und Downloads</option><option value="#section-14">9. Verlinkungen zu Websites und Social-Media-Angeboten</option><option value="#section-15">10. Google Maps</option><option value="#section-16">11. Fotos, Bildergalerie und historische Aufnahmen</option><option value="#section-18">12. Empfänger personenbezogener Daten</option><option value="#section-19">13. Speicherdauer</option><option value="#section-20">14. Rechtsgrundlagen der Verarbeitung</option><option value="#section-21">15. Ihre Rechte</option><option value="#section-22">16. Beschwerderecht bei der Datenschutzaufsichtsbehörde</option><option value="#section-24">17. Aktualisierung dieser Datenschutzerklärung</option></select></div><div class="container legal-layout">
 <article class="legal-content">
 <h2 id="section-1">1. Verantwortlicher</h2><p>Verantwortlicher für die Verarbeitung personenbezogener Daten auf dieser Website ist:</p><p>Festausschuss „750 Jahre Melkendorf“</p><p>Der Festausschuss „750 Jahre Melkendorf“ ist eine anlässlich des Ortsjubiläums gebildete Kooperation der beteiligten Melkendorfer Vereine und Organisationen.</p><p>Vertreten durch:</p><p>Fred Winkler, 1. Vorsitzender Otterbachstraße 4A</p><p>96123 Litzendorf</p><p>Guido Theis, 2. Vorsitzender Melkendorfer Hauptstraße 9</p><p>96123 Litzendorf</p><p>E-Mail: <a href="mailto:info@melkendorf-feiert.de">info@melkendorf-feiert.de</a> Website: <a href="https://750-jahre-melkendorf.de">www.750-jahre-melkendorf.de</a></p><p><strong>Verantwortlich für die Presse- und Redaktionsarbeit sowie für die Website:</strong><br/>
 Elias Brehm<br/>
@@ -398,5 +393,5 @@ E-Mail: eliasbrehm2007@gmail.com</p><h2 id="section-4">2. Allgemeine Hinweise</h
 <!-- Cloudflare Web Analytics -->
 <script data-cf-beacon='{"token":"998d56353c3848cbbf44826972b6600f"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script>
 <!-- End Cloudflare Web Analytics -->
-</body>
+<script>(()=>{const s=document.getElementById('legal-quick-select');if(!s)return;s.addEventListener('change',()=>{if(!s.value)return;const el=document.querySelector(s.value);if(el){el.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',s.value);}s.value='';});})();</script></body>
 </html>
