@@ -457,6 +457,37 @@ body{overflow-x:clip}
     overflow:auto;
   }
 }
+
+/* === HiDrive Next: sichere zweistufige Dorfarchiv-Einreichung === */
+.archive-handoff{margin-top:26px;padding:24px;border-radius:22px;background:linear-gradient(145deg,#eef3e7,#fffdf5);border:1px solid rgba(30,61,30,.13)}
+.archive-handoff-heading{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.archive-handoff-icon{display:grid;place-items:center;flex:0 0 46px;height:46px;background:#1e3d1e;color:#fff;border-radius:15px;font-size:1.5rem}
+.archive-handoff-heading strong{display:block;color:#1e3d1e;font-size:1.19rem;margin-bottom:6px}
+.archive-handoff p{color:#52604e;line-height:1.55;margin:0;font-size:.94rem}
+.archive-handoff-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.archive-handoff-step{display:flex;gap:12px;min-width:0;background:#fff;padding:16px;border-radius:15px;border:1px solid rgba(30,61,30,.08)}
+.archive-step-number{display:grid;place-items:center;flex:0 0 31px;height:31px;border-radius:50%;font-weight:900;color:#1e3d1e;background:#e8c261}
+.archive-handoff-step strong{display:block;color:#1e3d1e;margin-bottom:6px}
+.archive-handoff .archive-local-note{margin-top:15px;font-size:.84rem;color:#59645a}
+.file-help{font-size:.84rem!important;margin:10px 0 0!important;color:#52604e!important}
+.archive-ready[hidden]{display:none!important}
+.archive-ready{margin-top:22px;padding:23px;border:1px solid #d6e4ca;background:#f3f8ed;border-radius:19px}
+.archive-ready-badge{display:inline-flex;align-items:center;gap:8px;color:#1e3d1e;font-size:.86rem;font-weight:900;background:#dcebd1;padding:7px 12px;border-radius:99px}
+.archive-ready h3{font-family:Georgia,serif;color:#1e3d1e;font-size:clamp(1.35rem,3vw,1.9rem);margin:12px 0}
+.archive-ready p{color:#4b5b4b;font-size:.94rem;line-height:1.55;margin:0 0 12px;overflow-wrap:anywhere}
+.archive-reference{padding:10px 12px;border-radius:10px;background:#fff;display:inline-block}
+.archive-ready-actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.archive-ready-actions .btn{text-align:center;display:inline-flex;align-items:center;justify-content:center;min-height:48px;text-decoration:none}
+.archive-ready .archive-warning{margin:0;color:#6b4e15;padding-top:8px;font-weight:750}
+.submit-row .status{min-width:0;overflow-wrap:anywhere}
+@media(max-width:767px){
+ .archive-handoff{padding:18px 15px;border-radius:17px}
+ .archive-handoff-steps{grid-template-columns:1fr}
+ .archive-ready{padding:18px 15px}
+ .archive-ready-actions{flex-direction:column}
+ .archive-ready-actions .btn{width:100%}
+ .archive-handoff-heading{align-items:center}
+}
 </style>
 </head>
 <body>
@@ -466,7 +497,6 @@ body{overflow-x:clip}
 <span class="brand-mark">750</span>
 <span><strong>Jahre Melkendorf</strong><small>4.–6. Juni 2027</small></span>
 </a>
-
 <details class="subpage-menu">
 <summary>Menü</summary>
 <nav aria-label="Seitennavigation">
@@ -493,10 +523,10 @@ body{overflow-x:clip}
 <aside class="hero-card">
 <h3>So läuft die Einreichung ab</h3>
 <div class="process">
-<div class="process-step"><b>1</b><div><strong>Angaben machen</strong><span>Art, Zeitraum, Thema, Ort und Beschreibung angeben.</span></div></div>
-<div class="process-step"><b>2</b><div><strong>Dateien hochladen</strong><span>Fotos, Dokumente oder andere passende Unterlagen hinzufügen.</span></div></div>
-<div class="process-step"><b>3</b><div><strong>Prüfung</strong><span>Der Beitrag wird zunächst intern geprüft und nicht automatisch veröffentlicht.</span></div></div>
-<div class="process-step"><b>4</b><div><strong>Archiv</strong><span>Geeignete Beiträge können später in das öffentliche Dorfarchiv übernommen werden.</span></div></div>
+<div class="process-step"><b>1</b><div><strong>Angaben machen</strong><span>Art, Zeitraum, Thema, Ort, Beschreibung und Kontaktdaten angeben.</span></div></div>
+<div class="process-step"><b>2</b><div><strong>Dateien hochladen</strong><span>Aus Angaben und ausgewählten Dateien ein Archivpaket erstellen und bei HiDrive hochladen.</span></div></div>
+<div class="process-step"><b>3</b><div><strong>Prüfung</strong><span>Der Festausschuss prüft jede Einreichung vertraulich.</span></div></div>
+<div class="process-step"><b>4</b><div><strong>Archiv</strong><span>Geeignete Inhalte können nach Freigabe später veröffentlicht werden.</span></div></div>
 </div>
 </aside>
 </div>
@@ -510,7 +540,7 @@ body{overflow-x:clip}
 <p>Besonders wertvoll sind Aufnahmen mit einer ungefähren zeitlichen Einordnung, einem Ort oder einer kurzen Geschichte dazu. Falls etwas unbekannt ist, kann das entsprechend angegeben werden.</p>
 <div class="info-box">
 <strong>Wichtig</strong>
-<p>Einreichungen werden nicht automatisch veröffentlicht. Jeder Beitrag wird zunächst geprüft. Die eigentlichen Dateien sollen später in einem geschützten Cloud-Eingang gespeichert werden.</p>
+<p>Beiträge werden nicht automatisch veröffentlicht. Die Dateien werden nach deinem Upload in unserer IONOS HiDrive Next Cloud abgelegt und zunächst intern geprüft.</p>
 </div>
 </div>
 <div class="form-card" id="einreichen">
@@ -570,12 +600,12 @@ body{overflow-x:clip}
 <textarea id="description" name="beschreibung" placeholder="Was ist auf dem Bild zu sehen? Wer ist beteiligt? Welche Geschichte gehört dazu?" required=""></textarea>
 </div>
 <div class="field full">
-<label>Dateien hochladen *</label>
+<label>Fotos und Dokumente auswählen *</label>
 <div class="upload-box">
-<strong>Fotos, PDFs oder andere Dokumente auswählen</strong>
-<span>Mehrere Dateien sollen später gleichzeitig möglich sein. Der Cloud-Speicher ist in diesem Prototyp noch nicht produktiv verbunden.</span>
-<input accept="image/*,.pdf,.doc,.docx,.txt" id="files" multiple="" type="file"/>
-</div>
+<strong>Dateien für dein Einreichungspaket auswählen</strong>
+<span>Du kannst mehrere Fotos oder Dokumente auswählen. Wir fassen sie gemeinsam mit deinen Angaben zu einer ZIP-Datei zusammen, die du anschließend zu HiDrive hochlädst.</span>
+<input accept="image/*,.pdf,.doc,.docx,.txt" aria-describedby="filesHelper" id="files" multiple="" name="dateien" required="" type="file"/>
+<p class="file-help" id="filesHelper">Hinweis: Die ausgewählten Dateien bleiben zunächst auf deinem Gerät. Sie werden nicht automatisch versendet.</p></div>
 </div>
 <div class="field">
 <label for="salutation">Anrede *</label>
@@ -623,13 +653,39 @@ body{overflow-x:clip}
 <span>Ich habe die Datenschutzerklärung gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung der Einreichung zu. *</span>
 </label>
 </div>
-<div class="preview-note">
-<strong>Prototyp – noch kein echter Upload</strong>
-<p>Diese Seite ist bereits vollständig bedienbar, speichert aber noch keine Dateien. Sobald der Festausschuss einen Cloud-Speicher freigibt, wird hier der produktive Upload angebunden.</p>
+<div class="archive-handoff" id="archiveHandoff">
+<div class="archive-handoff-heading">
+<span aria-hidden="true" class="archive-handoff-icon">☁</span>
+<div>
+<strong>Deine Einreichung in 2 Schritten</strong>
+<p>Die Dateien werden nicht automatisch übertragen. Beide Schritte sind erforderlich.</p>
+</div>
+</div>
+<div class="archive-handoff-steps">
+<div class="archive-handoff-step">
+<span class="archive-step-number">1</span>
+<div><strong>Archivpaket erstellen</strong><p>Deine Fotos, Beschreibung, Kontaktdaten und Einwilligungen werden zu einer ZIP-Datei zusammengefasst und auf dein Gerät heruntergeladen.</p></div>
+</div>
+<div class="archive-handoff-step">
+<span class="archive-step-number">2</span>
+<div><strong>Archivpaket bei IONOS hochladen</strong><p>Öffne danach den sicheren HiDrive-Upload und wähle die heruntergeladene ZIP-Datei aus. Erst dieser Schritt übermittelt deine Einreichung an uns.</p></div>
+</div>
+</div>
+<p class="archive-local-note">Das ZIP wird lokal im Browser erstellt. Während der Vorbereitung werden keine Dateien an uns oder an einen externen Dienst gesendet.</p>
 </div>
 <div class="submit-row">
-<button class="btn" type="submit">Einreichung prüfen</button>
-<span aria-live="polite" class="status" id="status"></span>
+<button class="btn" id="createArchiveBundle" type="submit">1. Archivpaket erstellen</button>
+<span aria-live="polite" class="status" id="status" role="status"></span>
+</div><div class="archive-ready" hidden="" id="archiveReady">
+<div class="archive-ready-badge"><span aria-hidden="true">✓</span> Paket bereit</div>
+<h3>Jetzt noch in HiDrive hochladen</h3>
+<p>Dein Einreichungspaket <strong id="bundleFilename"></strong> wurde vorbereitet. Der Download wurde gestartet. Falls er nicht automatisch beginnt, nutze „ZIP herunterladen“.</p>
+<p class="archive-reference">Einreichungsnummer: <strong id="bundleReference"></strong></p>
+<div class="archive-ready-actions">
+<a class="btn btn-secondary" download="" href="#" id="downloadBundle">ZIP herunterladen</a>
+<a class="btn" href="https://c01.storage.ionos.de/s/b8C7iDnLzKYRLfB" id="hidriveUploadLink" rel="noopener noreferrer" target="_blank">2. HiDrive öffnen &amp; ZIP hochladen ↗</a>
+</div>
+<p class="archive-warning">Wichtig: Erst nachdem du die ZIP-Datei bei HiDrive hochgeladen hast, ist dein Beitrag eingereicht. Der Klick auf „Archivpaket erstellen“ reicht allein nicht aus.</p>
 </div>
 </form>
 </div>
@@ -648,45 +704,242 @@ body{overflow-x:clip}
 <a aria-label="Instagram" class="footer-social-link" href="#" title="Instagram"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></a><a aria-label="Facebook" class="footer-social-link" href="#" title="Facebook"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.75l.41-3H13.5V9.08c0-.87.24-1.46 1.58-1.46H16.8V4.94a22.7 22.7 0 0 0-2.46-.13c-2.43 0-4.09 1.48-4.09 4.2V11H7.5v3h2.75v8h3.25Z"></path></svg></a></div>
 </div>
 </footer>
-<script>
-(() => {
-  const form = document.getElementById('archiveForm');
-  const period = document.getElementById('period');
-  const unknown = document.getElementById('periodUnknown');
-  const status = document.getElementById('status');
 
-  unknown.addEventListener('change', () => {
-    period.disabled = unknown.checked;
-    period.required = !unknown.checked;
-    if (unknown.checked) period.value = '';
-  });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    status.textContent = '';
-
-    const topics = [...document.querySelectorAll('input[name="thema"]:checked')];
-    const files = document.getElementById('files').files;
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      status.textContent = 'Bitte prüfe die Pflichtfelder.';
-      return;
-    }
-    if (topics.length === 0) {
-      status.textContent = 'Bitte wähle mindestens ein Thema aus.';
-      return;
-    }
-    if (!files.length) {
-      status.textContent = 'Bitte wähle mindestens eine Datei aus.';
-      return;
-    }
-
-    status.textContent = 'Prototyp geprüft: Die Einreichung wäre vollständig. Der echte Cloud-Upload wird nach Freigabe des Speichers aktiviert.';
-  });
-})();
-</script>
 <!-- Cloudflare Web Analytics -->
 <script data-cf-beacon='{"token":"998d56353c3848cbbf44826972b6600f"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script>
-<!-- End Cloudflare Web Analytics --></body>
+<!-- End Cloudflare Web Analytics --><script>(() => {
+'use strict';
+const form = document.getElementById('archiveForm');
+const period = document.getElementById('period');
+const unknown = document.getElementById('periodUnknown');
+const status = document.getElementById('status');
+const button = document.getElementById('createArchiveBundle');
+const ready = document.getElementById('archiveReady');
+const downloadLink = document.getElementById('downloadBundle');
+let currentObjectUrl = null;
+let busy = false;
+const MAX_TOTAL_BYTES = 1.5 * 1024 * 1024 * 1024; // conservative browser limit; ZIP32 below 4GB
+
+unknown.addEventListener('change', () => {
+  period.disabled = unknown.checked;
+  period.required = !unknown.checked;
+  if (unknown.checked) period.value = '';
+});
+
+const crcTable = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function updateCRC(crc, buf) {
+  for (let i = 0; i < buf.length; i++) crc = crcTable[(crc ^ buf[i]) & 255] ^ (crc >>> 8);
+  return crc >>> 0;
+}
+async function crc32File(file, progress) {
+  let c = 0xFFFFFFFF;
+  const blockSize = 2 * 1024 * 1024;
+  for (let start = 0; start < file.size; start += blockSize) {
+    const view = new Uint8Array(await file.slice(start, start + blockSize).arrayBuffer());
+    c = updateCRC(c, view);
+    if (progress) progress(start + view.length);
+  }
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function dosDateTime(date) {
+  const year = Math.max(1980, Math.min(2107, date.getFullYear()));
+  const dosTime = ((date.getHours() & 31) << 11) | ((date.getMinutes() & 63) << 5) | (Math.floor(date.getSeconds()/2) & 31);
+  const dosDate = (((year-1980) & 127) << 9) | (((date.getMonth()+1) & 15) << 5) | (date.getDate() & 31);
+  return { dosTime, dosDate };
+}
+function cleanFilename(s) {
+  return String(s || 'Datei').replace(/[\\/\x00-\x1f<>:"|?*]/g,'_').replace(/^\.+/,'_').slice(0,180) || 'Datei';
+}
+function dedupeNames(files) {
+  const seen = new Set();
+  return files.map(file => {
+    let name = cleanFilename(file.name);
+    const dot = name.lastIndexOf('.');
+    const stem = dot > 0 ? name.slice(0, dot) : name;
+    const extension = dot > 0 ? name.slice(dot) : '';
+    let n = 2;
+    while (seen.has(name.toLocaleLowerCase('de-DE'))) name = `${stem}_${n++}${extension}`;
+    seen.add(name.toLocaleLowerCase('de-DE'));
+    return {file, entryName: `Dateien/${name}`};
+  });
+}
+// Creates a standards-compliant, UTF-8 ZIP using STORE mode; works offline without external scripts.
+async function makeZip(entries, onProgress) {
+  const encoder = new TextEncoder();
+  const chunks = [];
+  const central = [];
+  let offset = 0;
+  let done = 0;
+  for (const {name, file} of entries) {
+    const filename = encoder.encode(name);
+    if (filename.length > 65535 || file.size >= 0xFFFFFFFF) throw new Error('Dateiname oder Datei ist zu groß.');
+    const date = file.lastModified ? new Date(file.lastModified) : new Date();
+    const {dosDate,dosTime} = dosDateTime(date);
+    const crc = await crc32File(file, n => onProgress?.(done + n));
+    const local = new Uint8Array(30 + filename.length);
+    const a = new DataView(local.buffer);
+    a.setUint32(0,0x04034b50,true);
+    a.setUint16(4,20,true);
+    a.setUint16(6,0x0800,true);  // UTF-8
+    a.setUint16(8,0,true);       // stored, no compression
+    a.setUint16(10,dosTime,true);
+    a.setUint16(12,dosDate,true);
+    a.setUint32(14,crc,true);
+    a.setUint32(18,file.size,true);
+    a.setUint32(22,file.size,true);
+    a.setUint16(26,filename.length,true);
+    local.set(filename,30);
+    chunks.push(local,file);
+    const head = new Uint8Array(46 + filename.length);
+    const v = new DataView(head.buffer);
+    v.setUint32(0,0x02014b50,true);
+    v.setUint16(4,20,true); // version made by
+    v.setUint16(6,20,true); // version required
+    v.setUint16(8,0x0800,true); // UTF-8
+    v.setUint16(10,0,true);
+    v.setUint16(12,dosTime,true);
+    v.setUint16(14,dosDate,true);
+    v.setUint32(16,crc,true);
+    v.setUint32(20,file.size,true);
+    v.setUint32(24,file.size,true);
+    v.setUint16(28,filename.length,true);
+    v.setUint32(42,offset,true);
+    head.set(filename,46);
+    central.push(head);
+    offset += local.length + file.size;
+    if (offset >= 0xFFFFFFFF) throw new Error('Einreichung ist zu groß. Bitte teile die Dateien auf.');
+    done += file.size;
+  }
+  const start = offset;
+  for (const part of central) {chunks.push(part);offset += part.length;}
+  const end = new Uint8Array(22);
+  const e = new DataView(end.buffer);
+  e.setUint32(0,0x06054b50,true);
+  e.setUint16(8,entries.length,true);
+  e.setUint16(10,entries.length,true);
+  e.setUint32(12,offset-start,true);
+  e.setUint32(16,start,true);
+  chunks.push(end);
+  return new Blob(chunks,{type:'application/zip'});
+}
+function textFile(data, name, stamp) {
+  const bytes = new TextEncoder().encode('\uFEFF' + data);
+  return new File([bytes],name,{type:'text/plain;charset=utf-8',lastModified:stamp});
+}
+function refId() {
+  const date = new Date();
+  const stamp = [date.getFullYear(),String(date.getMonth()+1).padStart(2,'0'),String(date.getDate()).padStart(2,'0')].join('');
+  const rand = new Uint8Array(5);
+  crypto.getRandomValues(rand);
+  const code = [...rand].map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();
+  return `MEL-${stamp}-${code}`;
+}
+function invalidateBundle() {
+  if (busy || ready.hidden) return;
+  ready.hidden = true;
+  if (currentObjectUrl) {URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=null;}
+  status.textContent='Angaben geändert – bitte das Archivpaket neu erstellen.';
+}
+form.addEventListener('input',invalidateBundle);
+form.addEventListener('change',invalidateBundle);
+window.addEventListener('beforeunload',()=>{if(currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);});
+form.addEventListener('submit',async event => {
+  event.preventDefault();
+  if (busy) return;
+  ready.hidden = true;
+  if (currentObjectUrl) {URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=null;}
+  status.textContent='';
+  const chosen = [...document.querySelectorAll('input[name="thema"]:checked')].map(el=>el.value);
+  const files = [...document.getElementById('files').files];
+  if (!form.checkValidity()) {form.reportValidity();status.textContent='Bitte ergänze die Pflichtfelder.';return;}
+  if (!chosen.length) {status.textContent='Bitte wähle mindestens ein Thema aus.';form.querySelector('.topic-grid')?.scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if (!files.length) {status.textContent='Bitte wähle mindestens eine Datei aus.';return;}
+  const totalBytes=files.reduce((n,f)=>n+f.size,0);
+  if (totalBytes>MAX_TOTAL_BYTES) {status.textContent='Diese Sammlung ist für die Verarbeitung im Browser zu groß (über 1,5 GB). Bitte wähle zunächst weniger Dateien.';return;}
+  if (files.some(f=>f.size >= 0xFFFFFFFF)) {status.textContent='Eine Datei ist zu groß für dieses ZIP-Format.';return;}
+  busy=true;button.disabled=true;button.textContent='Archivpaket wird erstellt …';
+  try {
+    const id=refId();
+    const now = new Date();
+    const mapped = dedupeNames(files);
+    const val=id=>document.getElementById(id)?.value.trim()||'';
+    const rec={
+      'Einreichungsnummer':id,
+      'Erstellt am (ISO-Zeit)':now.toISOString(),
+      'Art':form.querySelector('input[name="art"]:checked')?.value||'',
+      'Zeitraum':unknown.checked?'Zeitraum unbekannt':val('period'),
+      'Themen':chosen,
+      'Ort / Bezug':val('place'),
+      'Genaues Jahr':val('exactYear'),
+      'Beschreibung / Hintergrund':val('description'),
+      'Kontakt':{'Anrede':val('salutation'),'Titel':val('title'),'Vorname':val('firstName'),'Nachname':val('lastName'),'E-Mail':val('email'),'Telefon':val('phone')},
+      'Rechte bestätigt':document.getElementById('rightsConfirm').checked,
+      'Veröffentlichung erlaubt (nach Prüfung)':document.getElementById('publishConsent').checked,
+      'Datenschutzhinweis bestätigt':document.getElementById('privacyConfirm').checked,
+      'Dateien':mapped.map(({file,entryName})=>({'Archivname':entryName,'Originalname':file.name,'Bytes':file.size,'Dateityp':file.type||'unbekannt'})),
+      'Bearbeitungsstatus':'Eingegangen zur Prüfung nach Upload in IONOS HiDrive Next; keine automatische Veröffentlichung.'
+    };
+    const text = [
+      '750 JAHRE MELKENDORF – DIGITALES DORFARCHIV',
+      `Einreichungsnummer: ${id}`,
+      `Erstellt am: ${now.toLocaleString('de-DE')}`,
+      '',
+      `Art: ${rec['Art']}`,
+      `Zeitraum: ${rec['Zeitraum']}`,
+      `Themen: ${chosen.join(', ')}`,
+      `Ort / Bezug: ${rec['Ort / Bezug']}`,
+      `Genaues Jahr: ${rec['Genaues Jahr']||'keine Angabe'}`,
+      '', 'BESCHREIBUNG', rec['Beschreibung / Hintergrund'], '',
+      'KONTAKT',
+      `${val('salutation')} ${val('title')} ${val('firstName')} ${val('lastName')}`.replace(/ +/g,' ').trim(),
+      `E-Mail: ${val('email')}`,
+      `Telefon: ${val('phone')||'keine Angabe'}`,
+      '', 'BESTÄTIGUNGEN',
+      `Berechtigung zur Übermittlung bestätigt: ${rec['Rechte bestätigt']?'Ja':'Nein'}`,
+      `Veröffentlichung nach Prüfung erlaubt: ${rec['Veröffentlichung erlaubt (nach Prüfung)']?'Ja':'Nein'}`,
+      `Datenschutzhinweis bestätigt: ${rec['Datenschutzhinweis bestätigt']?'Ja':'Nein'}`,
+      '', 'DATEIEN',
+      ...mapped.map(({file,entryName})=>`- ${entryName} (${file.size} Byte)`),
+      '', 'HINWEIS',
+      'Dieser Datensatz und die beiliegenden Dateien sind zur internen Prüfung bestimmt. Keine automatische Veröffentlichung.',
+      'Dieses Archivpaket wurde lokal im Browser erstellt und muss noch über den HiDrive-Dateianfrage-Link hochgeladen werden.',
+      ''
+    ].join('\r\n');
+    const stamp=now.getTime();
+    const entries=[
+      {name:'Einreichung.txt',file:textFile(text,'Einreichung.txt',stamp)},
+      {name:'Einreichung.json',file:new File([JSON.stringify(rec,null,2)],'Einreichung.json',{type:'application/json',lastModified:stamp})},
+      ...mapped.map(({file,entryName})=>({name:entryName,file}))
+    ];
+    const total=entries.reduce((n,{file})=>n+file.size,0);
+    let lastUpdate=0;
+    const bundle=await makeZip(entries, processed=>{
+      const n=performance.now();
+      if(n-lastUpdate>200){status.textContent=`Archivpaket wird erstellt … ${Math.min(99,Math.floor(processed / Math.max(total,1) *100))} %`;lastUpdate=n;}
+    });
+    const filename=`Dorfarchiv_Melkendorf_${id}.zip`;
+    currentObjectUrl=URL.createObjectURL(bundle);
+    downloadLink.href=currentObjectUrl;
+    downloadLink.download=filename;
+    document.getElementById('bundleFilename').textContent=filename;
+    document.getElementById('bundleReference').textContent=id;
+    ready.hidden=false;
+    status.textContent='Archivpaket erstellt. Jetzt bitte die ZIP-Datei bei HiDrive hochladen.';
+    // Trigger download from the initiated submit action; permanent manual fallback remains.
+    downloadLink.click();
+    ready.scrollIntoView({behavior:'smooth',block:'center'});
+  } catch (err) {
+    status.textContent='Das Paket konnte nicht erstellt werden. Bitte erneut versuchen oder weniger Dateien auswählen.';
+    console.error('Dorfarchiv-Paket konnte nicht erstellt werden',err);
+  } finally {busy=false;button.disabled=false;button.textContent='1. Archivpaket erstellen';}
+});
+})();</script></body>
 </html>
