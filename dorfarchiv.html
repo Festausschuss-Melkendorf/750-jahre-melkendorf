@@ -491,8 +491,25 @@ body{overflow-x:clip}
 
 /* V7: einzelnes Zeitraum-Feld & Standkennzeichnung */
 .archive-version{margin:7px 0 18px;color:var(--forest);font-size:.86rem;font-weight:700;line-height:1.5;}
+
+/* Dorfarchiv V8: verständliche Einreichung und klare Übergabe */
+.form-simple-intro{margin:0 0 26px;color:var(--muted);font-size:1rem;line-height:1.65;max-width:650px}
+.form-section-title{margin:24px 0 16px;color:#1e3d1e;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.3rem,2.4vw,1.65rem);line-height:1.25}
+.form-contact-header{margin-top:14px}
+.form-contact-header p{color:#59645a;margin:0 0 14px;line-height:1.5;font-size:.95rem}
+.selected-files{margin:12px 0 0;padding:12px 14px;border-radius:12px;background:#eef3e7;color:#1e3d1e;font-weight:700;font-size:.9rem}
+.archive-ready{border:2px solid #51733a;box-shadow:0 12px 32px rgba(30,61,30,.08)}
+.archive-ready h3{line-height:1.2}
+.archive-final-steps{padding:0 0 0 22px;margin:18px 0 20px;color:#1e3d1e}
+.archive-final-steps li{padding-left:5px;margin:0 0 11px;line-height:1.55}
+.archive-ready-actions{gap:12px}
+.archive-ready-actions .btn{min-height:48px}
+.archive-help{margin:16px 0;border-radius:12px;background:#f7f5ee;border:1px solid rgba(30,61,30,.14);padding:12px 14px}
+.archive-help summary{cursor:pointer;color:#1e3d1e;font-weight:800}
+.archive-help p{margin:12px 0 0;line-height:1.6}
+@media(max-width:767px){.archive-final-steps{padding-left:20px}.archive-ready-actions{display:flex;flex-direction:column}.archive-ready-actions .btn{width:100%;text-align:center;justify-content:center}}
 </style>
-<meta content="v7-2026-10-14" name="melkendorf-dorfarchiv-version"/></head>
+<meta content="v8-2026-10-15" name="melkendorf-dorfarchiv-version"/></head>
 <body>
 <header class="site-header">
 <div class="container nav-wrap">
@@ -548,14 +565,10 @@ body{overflow-x:clip}
 </div>
 <div class="form-card" id="einreichen">
 <p class="eyebrow">Einreichungsformular</p>
-<h2>Beitrag zum Dorfarchiv einreichen</h2><p aria-label="Versionsstand des Einreichungsformulars" class="archive-version">Einreichung über IONOS HiDrive Next · Formularstand 14.10.2026</p>
-<div class="stepbar">
-<span class="step-pill active">1 · Inhalt</span>
-<span class="step-pill">2 · Einordnung</span>
-<span class="step-pill">3 · Dateien</span>
-<span class="step-pill">4 · Kontakt &amp; Rechte</span>
-</div>
+<h2>Beitrag zum Dorfarchiv einreichen</h2><p aria-label="Versionsstand des Einreichungsformulars" class="archive-version">Einreichung über IONOS HiDrive Next · Formularstand 15.10.2026</p>
+<p class="form-simple-intro">Erzähle uns von deinem Beitrag und ergänze deine Kontaktdaten. Das dauert nur wenige Minuten. Danach zeigen wir dir ganz genau, wie du ihn sicher übermittelst.</p>
 <form id="archiveForm" novalidate="">
+<h3 class="form-section-title">1. Deine Erinnerung</h3>
 <div class="field full">
 <label>Was möchtest du einreichen? *</label>
 <div class="type-grid">
@@ -599,14 +612,16 @@ body{overflow-x:clip}
 <label for="description">Beschreibung / Hintergrund *</label>
 <textarea id="description" name="beschreibung" placeholder="Was ist auf dem Bild zu sehen? Wer ist beteiligt? Welche Geschichte gehört dazu?" required=""></textarea>
 </div>
+<h3 class="form-section-title">2. Fotos oder Dokumente</h3>
 <div class="field full">
-<label>Fotos und Dokumente auswählen *</label>
+<label for="files">Fotos und Dokumente <small>für Geschichten ohne Bild optional</small></label>
 <div class="upload-box">
 <strong>Dateien für dein Einreichungspaket auswählen</strong>
 <span>Du kannst mehrere Fotos oder Dokumente auswählen. Wir fassen sie gemeinsam mit deinen Angaben zu einer ZIP-Datei zusammen, die du anschließend zu HiDrive hochlädst.</span>
-<input accept="image/*,.pdf,.doc,.docx,.txt" aria-describedby="filesHelper" id="files" multiple="" name="dateien" required="" type="file"/>
-<p class="file-help" id="filesHelper">Hinweis: Die ausgewählten Dateien bleiben zunächst auf deinem Gerät. Sie werden nicht automatisch versendet.</p></div>
+<input accept="image/*,.pdf,.doc,.docx,.txt" aria-describedby="filesHelper fileSelection" id="files" multiple="" name="dateien" type="file"/>
+<p class="file-help" id="filesHelper">Mehrere Bilder sind möglich. Wenn du nur eine Geschichte erzählen möchtest, kannst du dieses Feld leer lassen. Nichts wird beim Auswählen bereits hochgeladen.</p><p class="selected-files" id="fileSelection" aria-live="polite">Noch keine Dateien ausgewählt.</p></div>
 </div>
+<div class="form-contact-header full"><h3 class="form-section-title">3. So können wir dich erreichen</h3><p>Deine Kontaktdaten werden nur zur Bearbeitung deines Beitrags verwendet.</p></div>
 <div class="field">
 <label for="salutation">Anrede *</label>
 <select id="salutation" required="">
@@ -657,35 +672,41 @@ body{overflow-x:clip}
 <div class="archive-handoff-heading">
 <span aria-hidden="true" class="archive-handoff-icon">☁</span>
 <div>
-<strong>Deine Einreichung in 2 Schritten</strong>
-<p>Die Dateien werden nicht automatisch übertragen. Beide Schritte sind erforderlich.</p>
+<strong>Fast geschafft: So kommt dein Beitrag zu uns</strong>
+<p>Wir bündeln deine Angaben und Bilder in einer einzigen Datei. Danach musst du sie nur noch bei IONOS hochladen.</p>
 </div>
 </div>
 <div class="archive-handoff-steps">
 <div class="archive-handoff-step">
 <span class="archive-step-number">1</span>
-<div><strong>Archivpaket erstellen</strong><p>Deine Fotos, Beschreibung, Kontaktdaten und Einwilligungen werden zu einer ZIP-Datei zusammengefasst und auf dein Gerät heruntergeladen.</p></div>
+<div><strong>Beitrag vorbereiten</strong><p>Klicke unten auf „Beitrag vorbereiten“. Dein Gerät lädt eine ZIP-Datei mit allen Angaben und gegebenenfalls Fotos herunter.</p></div>
 </div>
 <div class="archive-handoff-step">
 <span class="archive-step-number">2</span>
-<div><strong>Archivpaket bei IONOS hochladen</strong><p>Öffne danach den sicheren HiDrive-Upload und wähle die heruntergeladene ZIP-Datei aus. Erst dieser Schritt übermittelt deine Einreichung an uns.</p></div>
+<div><strong>Datei sicher versenden</strong><p>Öffne über die nächste Schaltfläche den IONOS-Upload und wähle dort die heruntergeladene Datei aus. Erst damit ist sie an uns übermittelt.</p></div>
 </div>
 </div>
 <p class="archive-local-note">Das ZIP wird lokal im Browser erstellt. Während der Vorbereitung werden keine Dateien an uns oder an einen externen Dienst gesendet.</p>
 </div>
 <div class="submit-row">
-<button class="btn" id="createArchiveBundle" type="submit">1. Archivpaket erstellen</button>
+<button class="btn" id="createArchiveBundle" type="submit">Beitrag vorbereiten ↓</button>
 <span aria-live="polite" class="status" id="status" role="status"></span>
 </div><div class="archive-ready" hidden="" id="archiveReady">
-<div class="archive-ready-badge"><span aria-hidden="true">✓</span> Paket bereit</div>
-<h3>Jetzt noch in HiDrive hochladen</h3>
-<p>Dein Einreichungspaket <strong id="bundleFilename"></strong> wurde vorbereitet. Der Download wurde gestartet. Falls er nicht automatisch beginnt, nutze „ZIP herunterladen“.</p>
-<p class="archive-reference">Einreichungsnummer: <strong id="bundleReference"></strong></p>
+<div class="archive-ready-badge"><span aria-hidden="true">✓</span> Dein Beitrag ist vorbereitet</div>
+<h3>Nur noch ein Schritt: Datei hochladen</h3>
+<p>Dein Beitrag wurde als <strong id="bundleFilename"></strong> heruntergeladen. Öffne jetzt den Upload und wähle dort genau diese Datei aus.</p>
+<ol class="archive-final-steps">
+<li><strong>Auf „IONOS-Upload öffnen“ klicken.</strong> Es öffnet sich ein neuer Tab.</li>
+<li><strong>Die heruntergeladene Datei auswählen.</strong> Du findest sie meistens im Ordner „Downloads“ deines Geräts.</li>
+<li><strong>Upload bei IONOS abschließen.</strong> Erst die Bestätigung von IONOS bedeutet, dass wir deinen Beitrag erhalten haben.</li>
+</ol>
 <div class="archive-ready-actions">
-<a class="btn btn-secondary" download="" href="#" id="downloadBundle">ZIP herunterladen</a>
-<a class="btn" href="https://c01.storage.ionos.de/s/b8C7iDnLzKYRLfB" id="hidriveUploadLink" rel="noopener noreferrer" target="_blank">2. HiDrive öffnen &amp; ZIP hochladen ↗</a>
+<a class="btn" href="https://c01.storage.ionos.de/s/b8C7iDnLzKYRLfB" id="hidriveUploadLink" rel="noopener noreferrer" target="_blank">IONOS-Upload öffnen ↗</a>
+<a class="btn btn-secondary" download="" href="#" id="downloadBundle">Datei erneut herunterladen ↓</a>
 </div>
-<p class="archive-warning">Wichtig: Erst nachdem du die ZIP-Datei bei HiDrive hochgeladen hast, ist dein Beitrag eingereicht. Der Klick auf „Archivpaket erstellen“ reicht allein nicht aus.</p>
+<details class="archive-help"><summary>Wo finde ich meine heruntergeladene Datei?</summary><p>Am PC meist unter „Downloads“, auf Android unter „Downloads“ bzw. in der Dateien-App und auf dem iPhone unter „Dateien → Downloads“. Die Datei endet auf <strong>.zip</strong>. Bitte nicht entpacken, sondern genau so hochladen.</p></details>
+<p class="archive-reference">Deine Einreichungsnummer: <strong id="bundleReference"></strong></p>
+<p class="archive-warning"><strong>Noch nicht abgeschickt:</strong> Die Vorbereitung auf dieser Website allein sendet nichts an uns. Bitte schließe unbedingt den Upload auf der IONOS-Seite ab.</p>
 </div>
 </form>
 </div>
@@ -715,6 +736,16 @@ const status = document.getElementById('status');
 const button = document.getElementById('createArchiveBundle');
 const ready = document.getElementById('archiveReady');
 const downloadLink = document.getElementById('downloadBundle');
+const filesInput = document.getElementById('files');
+const fileSelection = document.getElementById('fileSelection');
+const describeFiles = () => {
+  const fs = [...filesInput.files];
+  const bytes = fs.reduce((sum, f) => sum + f.size, 0);
+  const mb = (bytes / 1024 / 1024).toLocaleString('de-DE', { maximumFractionDigits: 1 });
+  fileSelection.textContent = fs.length ? `${fs.length} Datei${fs.length===1?'':'en'} ausgewählt (zusammen ${mb} MB)` : 'Noch keine Dateien ausgewählt.';
+};
+filesInput.addEventListener('change', describeFiles);
+describeFiles();
 let currentObjectUrl = null;
 let busy = false;
 const MAX_TOTAL_BYTES = 1.5 * 1024 * 1024 * 1024; // conservative browser limit; ZIP32 below 4GB
@@ -845,7 +876,7 @@ function invalidateBundle() {
   if (busy || ready.hidden) return;
   ready.hidden = true;
   if (currentObjectUrl) {URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=null;}
-  status.textContent='Angaben geändert – bitte das Archivpaket neu erstellen.';
+  status.textContent='Deine Angaben wurden geändert. Bitte bereite den Beitrag erneut vor.';
 }
 form.addEventListener('input',invalidateBundle);
 form.addEventListener('change',invalidateBundle);
@@ -860,11 +891,11 @@ form.addEventListener('submit',async event => {
   const files = [...document.getElementById('files').files];
   if (!form.checkValidity()) {form.reportValidity();status.textContent='Bitte ergänze die Pflichtfelder.';return;}
   if (!chosen.length) {status.textContent='Bitte wähle mindestens ein Thema aus.';form.querySelector('.topic-grid')?.scrollIntoView({behavior:'smooth',block:'center'});return;}
-  if (!files.length) {status.textContent='Bitte wähle mindestens eine Datei aus.';return;}
+  if (!files.length && form.querySelector('input[name="art"]:checked')?.value !== 'Geschichte') {status.textContent='Bitte wähle mindestens eine Datei aus oder entscheide dich für „Geschichte / Erinnerung“ ohne Anhang.';document.getElementById('files').focus();return;}
   const totalBytes=files.reduce((n,f)=>n+f.size,0);
   if (totalBytes>MAX_TOTAL_BYTES) {status.textContent='Diese Sammlung ist für die Verarbeitung im Browser zu groß (über 1,5 GB). Bitte wähle zunächst weniger Dateien.';return;}
   if (files.some(f=>f.size >= 0xFFFFFFFF)) {status.textContent='Eine Datei ist zu groß für dieses ZIP-Format.';return;}
-  busy=true;button.disabled=true;button.textContent='Archivpaket wird erstellt …';
+  busy=true;button.disabled=true;button.textContent='Beitrag wird vorbereitet …';
   try {
     const id=refId();
     const now = new Date();
@@ -929,14 +960,14 @@ form.addEventListener('submit',async event => {
     document.getElementById('bundleFilename').textContent=filename;
     document.getElementById('bundleReference').textContent=id;
     ready.hidden=false;
-    status.textContent='Archivpaket erstellt. Jetzt bitte die ZIP-Datei bei HiDrive hochladen.';
+    status.textContent='Dein Beitrag ist vorbereitet. Jetzt bitte die Datei bei IONOS hochladen.';
     // Trigger download from the initiated submit action; permanent manual fallback remains.
     downloadLink.click();
     ready.scrollIntoView({behavior:'smooth',block:'center'});
   } catch (err) {
-    status.textContent='Das Paket konnte nicht erstellt werden. Bitte erneut versuchen oder weniger Dateien auswählen.';
+    status.textContent='Die Datei konnte nicht vorbereitet werden. Bitte versuche es erneut oder wähle weniger Fotos aus.';
     console.error('Dorfarchiv-Paket konnte nicht erstellt werden',err);
-  } finally {busy=false;button.disabled=false;button.textContent='1. Archivpaket erstellen';}
+  } finally {busy=false;button.disabled=false;button.textContent='Beitrag vorbereiten ↓';}
 });
 })();</script></body>
 </html>
