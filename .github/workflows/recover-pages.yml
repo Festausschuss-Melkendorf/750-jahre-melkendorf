@@ -1,0 +1,43 @@
+name: Recover blocked GitHub Pages deployment
+on:
+  push:
+    paths:
+      - '.github/workflows/recover-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  actions: write
+
+jobs:
+  release-stuck-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel the stale Pages deployment only
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          target="3c9833e17126762bea58876c3daf60a9e444f9b9"
+          url="https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/deployments/${target}/cancel"
+          code=$(curl --silent --show-error --output /tmp/pages-cancel.json --write-out '%{http_code}' -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GH_TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" "${url}")
+          echo "Pages deployment cancellation response: HTTP ${code}"
+          if [ "${code}" != "204" ] && [ "${code}" != "404" ]; then cat /tmp/pages-cancel.json; exit 1; fi
+      - name: Cancel the obsolete queued workflow when possible
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          code=$(curl --silent --show-error --output /tmp/workflow-cancel.json --write-out '%{http_code}' -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GH_TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/38597347674/force-cancel")
+          echo "Obsolete workflow force-cancel: HTTP ${code}"
+          if [ "${code}" != "202" ]; then cat /tmp/workflow-cancel.json; echo "Continuing: the Pages deployment cancellation above is the essential step."; fi
+      - name: Request fresh GitHub Pages build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          code=$(curl --silent --show-error --output /tmp/pages-build.json --write-out '%{http_code}' -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GH_TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28" "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages/builds")
+          echo "Pages rebuild request: HTTP ${code}"
+          cat /tmp/pages-build.json
+          if [ "${code}" != "201" ]; then exit 1; fi
