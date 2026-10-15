@@ -520,8 +520,15 @@ body{overflow-x:clip}
 .submit-row{flex-wrap:wrap}
 #manualArchive{font-size:.92rem}
 @media(max-width:480px){.submit-row button{width:100%}}
+/* Die Kontaktüberschrift muss beide Spalten der Formular-Grids einnehmen */
+.form-grid > .form-contact-header {grid-column:1 / -1;min-width:0;width:100%}
+.form-grid > .form-contact-header .form-section-title {margin:18px 0 10px}
+.turnstile-diagnostic {margin-top:13px;padding:13px 15px;border:1px solid #cc9876;background:#fff8f0;color:#65331d;border-radius:12px;line-height:1.5;overflow-wrap:anywhere}
+.turnstile-diagnostic p{margin:0 0 9px;color:inherit}
+.turnstile-diagnostic strong{color:inherit}
+.turnstile-diagnostic button{cursor:pointer;min-height:38px;background:#fff;color:#1e3d1e;border:1px solid #51733a;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700}
 </style>
-<meta content="v9-upload-test-2026-10-15" name="melkendorf-dorfarchiv-version"/></head>
+<meta content="v10-turnstile-diagnose-2026-10-15" name="melkendorf-dorfarchiv-version"/></head>
 <body>
 <header class="site-header">
 <div class="container nav-wrap">
@@ -577,7 +584,7 @@ body{overflow-x:clip}
 </div>
 <div class="form-card" id="einreichen">
 <p class="eyebrow">Einreichungsformular</p>
-<h2>Beitrag zum Dorfarchiv einreichen</h2><p aria-label="Versionsstand des Einreichungsformulars" class="archive-version">TESTVERSION · Direkte Einreichung über Cloudflare & IONOS · 15.10.2026</p>
+<h2>Beitrag zum Dorfarchiv einreichen</h2><p aria-label="Versionsstand des Einreichungsformulars" class="archive-version">TESTVERSION · Direkte Einreichung · Stand 15.10.2026 (V10)</p>
 <p class="form-simple-intro">TESTVERSION: Bitte zunächst nur mit Testangaben und kleinen Testdateien ausprobieren. Nach erfolgreicher Sicherheitsprüfung wird dein Beitrag direkt an IONOS gesendet – ohne einen zweiten Upload.</p>
 <form id="archiveForm" novalidate="">
 <h3 class="form-section-title">1. Deine Erinnerung</h3>
@@ -703,7 +710,11 @@ body{overflow-x:clip}
 <div class="archive-security">
 <strong>Spamschutz</strong>
 <p>Bitte schließe die Sicherheitsprüfung ab, damit wir deinen Beitrag direkt entgegennehmen können.</p>
-<div id="archiveTurnstile" class="cf-turnstile" data-sitekey="0x4AAAAAAFX2TPP4qQjRH3lg" data-action="dorfarchiv_upload" data-size="flexible"></div>
+<div id="archiveTurnstile" class="cf-turnstile" data-sitekey="0x4AAAAAAFX2TPP4qQjRH3lg" data-action="dorfarchiv_upload" data-size="flexible" data-error-callback="melkendorfTurnstileError" data-callback="melkendorfTurnstileSolved" data-expired-callback="melkendorfTurnstileExpired"></div>
+<div id="turnstileDiagnostic" class="turnstile-diagnostic" role="alert" hidden>
+  <p id="turnstileDiagnosticText"></p>
+  <button type="button" id="turnstileRetry">Sicherheitsprüfung erneut versuchen</button>
+</div>
 </div>
 <div class="submit-row">
 <button class="btn" id="createArchiveBundle" type="submit">Beitrag direkt einreichen ↑</button>
@@ -752,6 +763,36 @@ body{overflow-x:clip}
 <!-- Cloudflare Web Analytics -->
 <script data-cf-beacon='{"token":"998d56353c3848cbbf44826972b6600f"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script>
 <!-- End Cloudflare Web Analytics -->
+<script>
+/* Hilft, Turnstile-Konfigurations- und Verbindungsfehler sichtbar zu machen. */
+window.melkendorfTurnstileError = function(errorCode) {
+  const diag = document.getElementById('turnstileDiagnostic');
+  const label = document.getElementById('turnstileDiagnosticText');
+  if (diag && label) {
+    const code = String(errorCode || 'unbekannt');
+    let advice = 'Bitte versuche es erneut. Wenn das nicht klappt, probiere den Browser ohne Werbeblocker oder nutze den alternativen HiDrive-Upload.';
+    if (code.startsWith('110200')) advice = 'Die Website-Adresse ist noch nicht für das Cloudflare-Turnstile-Widget freigegeben. Bitte 750-jahre-melkendorf.de in Turnstile → Settings → Hostname Management prüfen.';
+    else if (code.startsWith('110100') || code.startsWith('110110') || code.startsWith('400020')) advice = 'Der öffentliche Turnstile Site Key ist nicht gültig oder wird nicht gefunden. Bitte den Site Key im Cloudflare-Dashboard prüfen.';
+    else if (code.startsWith('200500')) advice = 'Der Browser konnte den Cloudflare-Prüfrahmen nicht laden. Bitte Schutz-Erweiterungen und Blockierungen von challenges.cloudflare.com prüfen.';
+    label.textContent = 'Cloudflare-Sicherheitsprüfung fehlgeschlagen (Fehlercode ' + code + '). ' + advice;
+    diag.hidden = false;
+  }
+  console.warn('Melkendorf Turnstile Fehlercode:', errorCode);
+  return true;
+};
+window.melkendorfTurnstileSolved = function() {
+  const diag = document.getElementById('turnstileDiagnostic');
+  if (diag) diag.hidden = true;
+};
+window.melkendorfTurnstileExpired = function() {
+  const diag = document.getElementById('turnstileDiagnostic');
+  const label = document.getElementById('turnstileDiagnosticText');
+  if (diag && label) {
+    label.textContent = 'Die Sicherheitsprüfung ist abgelaufen. Bitte auf „Sicherheitsprüfung erneut versuchen“ klicken.';
+    diag.hidden = false;
+  }
+};
+</script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>(() => {
 'use strict';
@@ -759,6 +800,16 @@ const form = document.getElementById('archiveForm');
 const period = document.getElementById('period');
 const unknown = document.getElementById('periodUnknown');
 const status = document.getElementById('status');
+document.getElementById('turnstileRetry')?.addEventListener('click', () => {
+  const diag = document.getElementById('turnstileDiagnostic');
+  if (diag) diag.hidden = true;
+  if (window.turnstile?.reset) {
+    try { window.turnstile.reset('#archiveTurnstile'); }
+    catch (_) { window.location.reload(); }
+  } else {
+    window.location.reload();
+  }
+});
 const button = document.getElementById('createArchiveBundle');
 const ready = document.getElementById('archiveReady');
 const downloadLink = document.getElementById('downloadBundle');
