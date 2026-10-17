@@ -734,14 +734,14 @@ body{overflow-x:clip}
 <a class="btn btn-secondary" download="" href="#" id="downloadBundle">Datei erneut herunterladen ↓</a>
 </div>
 <details class="archive-help"><summary>Wo finde ich meine heruntergeladene Datei?</summary><p>Am PC meist unter „Downloads“, auf Android unter „Downloads“ bzw. in der Dateien-App und auf dem iPhone unter „Dateien → Downloads“. Die Datei endet auf <strong>.zip</strong>. Bitte nicht entpacken, sondern genau so hochladen.</p></details>
-<p class="archive-reference">Deine Einreichungsnummer: <strong id="bundleReference"></strong></p>
+
 <p class="archive-warning"><strong>Hinweis:</strong> Wenn du diese Alternative nutzt, gilt dein Beitrag erst nach dem erfolgreichen Upload auf der IONOS-Seite als eingereicht.</p>
 </div>
 <div class="archive-ready archive-success" id="directSuccess" hidden>
 <div class="archive-ready-badge"><span aria-hidden="true">✓</span> Erfolgreich eingereicht</div>
-<h3>Vielen Dank für deinen Beitrag!</h3>
+<h3>Vielen Dank! Dein Beitrag ist bei uns angekommen.</h3>
 <p>HiDrive hat deinen Beitrag erfolgreich angenommen. Wir prüfen die eingesendeten Inhalte, bevor etwas veröffentlicht wird. Ein weiterer Upload ist nicht nötig.</p>
-<p class="archive-reference">Deine Einreichungsnummer: <strong id="directSuccessReference"></strong></p>
+
 </div>
 </form>
 </div>
@@ -1055,7 +1055,7 @@ form.addEventListener('submit',async event => {
     downloadLink.href=currentObjectUrl;
     downloadLink.download=filename;
     document.getElementById('bundleFilename').textContent=filename;
-    document.getElementById('bundleReference').textContent=id;
+    
     const showManual = (reason) => {
       ready.hidden=false;
       status.textContent=reason;
@@ -1085,7 +1085,7 @@ form.addEventListener('submit',async event => {
         const reply = await response.json().catch(() => ({}));
         if (response.status === 201 && reply.ok === true && reply.reference === id) {
           successPanel.hidden=false;
-          document.getElementById('directSuccessReference').textContent=id;
+          
           status.textContent='Erfolgreich übermittelt! HiDrive hat deinen Beitrag angenommen.';
           successPanel.scrollIntoView({behavior:'smooth',block:'center'});
           return;
