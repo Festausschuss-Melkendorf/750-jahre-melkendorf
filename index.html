@@ -516,6 +516,19 @@ body{overflow-x:clip}
 
 #travel-card .travel-open{
   cursor:pointer;
+  display:inline-block;
+  padding:0;
+  border:0;
+  background:transparent;
+  font:inherit;
+  font-weight:700;
+  color:var(--forest);
+  text-align:left;
+}
+#travel-card .travel-open:focus-visible{
+  outline:3px solid var(--forest);
+  outline-offset:5px;
+  border-radius:3px;
 }
 
 @media(max-width:767px){
@@ -914,7 +927,7 @@ body{overflow-x:clip}
 <div class="container">
 <div class="section-heading"><p class="eyebrow">Gut vorbereitet</p><h2>Besucherinformationen</h2><p>Alles Wichtige für einen entspannten Festbesuch – kompakt und mobil gut lesbar.</p></div>
 <div class="info-grid">
-<article aria-controls="travel-map-panel" aria-expanded="false" id="travel-card" role="button" tabindex="0"><span>⌖</span><h3>Anreise &amp; Parken</h3><p>Direkte Routenplanung nach Melkendorf sowie Hinweise zu Parkflächen und Anfahrt.</p><a class="travel-open" href="#travel-map-panel">Karte anzeigen</a></article>
+<article id="travel-card"><span aria-hidden="true">⌖</span><h3>Anreise &amp; Parken</h3><p>Direkte Routenplanung nach Melkendorf sowie Hinweise zu Parkflächen und Anfahrt.</p><button class="travel-open" id="travel-map-open" type="button" aria-label="Karte für Anreise und Parken anzeigen" aria-controls="travel-map-panel" aria-expanded="false">Karte anzeigen</button></article>
 <article><span>▦</span><h3>Lageplan</h3><p>Festgelände, Bühnen, Toiletten, Gastronomie und Erste Hilfe.</p><a href="#">Plan folgt</a></article>
 <article id="essen"><span>♨</span><h3>Essen &amp; Getränke</h3><p>Speisen, Getränkekarte, Öffnungszeiten und Hinweise.</p><a href="#">Karte folgt</a></article>
 <article><span>?</span><h3>FAQ</h3><p>Antworten zu Barrierefreiheit, Wetter, Bezahlung und mehr.</p><a href="#">Fragen ansehen</a></article>
@@ -1253,20 +1266,21 @@ if(cd){
   const section = document.getElementById('besucherinfos');
   const grid = section?.querySelector('.info-grid');
   const card = document.getElementById('travel-card');
+  const openButton = document.getElementById('travel-map-open');
   const panel = document.getElementById('travel-map-panel');
   const close = document.getElementById('travel-map-close');
   const frame = document.getElementById('travel-map-frame');
   const wrap = panel?.querySelector('.travel-map-wrap');
   const consentButton = document.getElementById('map-consent-load');
 
-  if (!section || !grid || !card || !panel || !close || !frame || !wrap || !consentButton) return;
+  if (!section || !grid || !card || !openButton || !panel || !close || !frame || !wrap || !consentButton) return;
 
   const openPanel = (event) => {
     if (event) event.preventDefault();
     grid.classList.add('is-hidden');
     panel.classList.add('is-visible');
     panel.setAttribute('aria-hidden', 'false');
-    card.setAttribute('aria-expanded', 'true');
+    openButton.setAttribute('aria-expanded', 'true');
     requestAnimationFrame(() => panel.scrollIntoView({behavior:'smooth',block:'start'}));
   };
 
@@ -1274,7 +1288,7 @@ if(cd){
     panel.classList.remove('is-visible');
     panel.setAttribute('aria-hidden', 'true');
     grid.classList.remove('is-hidden');
-    card.setAttribute('aria-expanded', 'false');
+    openButton.setAttribute('aria-expanded', 'false');
     requestAnimationFrame(() => section.scrollIntoView({behavior:'smooth',block:'start'}));
   };
 
@@ -1284,10 +1298,10 @@ if(cd){
   };
 
   card.addEventListener('click', openPanel);
-  card.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') openPanel(event);
+  close.addEventListener('click', () => {
+    closePanel();
+    openButton.focus({preventScroll:true});
   });
-  close.addEventListener('click', closePanel);
   consentButton.addEventListener('click', loadGoogleMap);
 })();
 </script><script src="/site-updates.js" defer></script>
