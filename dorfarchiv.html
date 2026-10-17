@@ -705,7 +705,7 @@ body{overflow-x:clip}
 <a class="btn btn-secondary" download="" href="#" id="downloadBundle">Datei erneut herunterladen ↓</a>
 </div>
 <details class="archive-help"><summary>Wo finde ich meine heruntergeladene Datei?</summary><p>Am PC meist unter „Downloads“, auf Android unter „Downloads“ bzw. in der Dateien-App und auf dem iPhone unter „Dateien → Downloads“. Die Datei endet auf <strong>.zip</strong>. Bitte nicht entpacken, sondern genau so hochladen.</p></details>
-<p class="archive-reference">Deine Einreichungsnummer: <strong id="bundleReference"></strong></p>
+
 <p class="archive-warning"><strong>Noch nicht abgeschickt:</strong> Die Vorbereitung auf dieser Website allein sendet nichts an uns. Bitte schließe unbedingt den Upload auf der IONOS-Seite ab.</p>
 </div>
 </form>
@@ -958,7 +958,7 @@ form.addEventListener('submit',async event => {
     downloadLink.href=currentObjectUrl;
     downloadLink.download=filename;
     document.getElementById('bundleFilename').textContent=filename;
-    document.getElementById('bundleReference').textContent=id;
+    
     ready.hidden=false;
     status.textContent='Dein Beitrag ist vorbereitet. Jetzt bitte die Datei bei IONOS hochladen.';
     // Trigger download from the initiated submit action; permanent manual fallback remains.
