@@ -1,4 +1,4 @@
-name: Optimize jubilee website images (one time)
+name: Optimize jubilee website images (one time) # rerun with corrected image
 on:
   push:
     paths:
