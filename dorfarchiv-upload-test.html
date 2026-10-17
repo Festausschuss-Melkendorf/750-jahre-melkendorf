@@ -708,7 +708,7 @@ body{overflow-x:clip}
 <div><strong>Direkt absenden</strong><p>Klicke auf „Beitrag direkt einreichen“. Die Bestätigung erscheint hier, sobald HiDrive den Upload angenommen hat.</p></div>
 </div>
 </div>
-<p class="archive-local-note">Bis du absendest, bleiben deine ausgewählten Dateien auf deinem Gerät. Für größere Sammlungen (über ca. 38 MB) kannst du den bisherigen HiDrive-Upload nutzen.</p>
+<p class="archive-local-note">Bis du absendest, bleiben deine ausgewählten Dateien auf deinem Gerät.</p>
 </div>
 <div class="archive-security" id="archiveSecurity">
 <strong>Spamschutz</strong>
@@ -761,7 +761,7 @@ body{overflow-x:clip}
 <div>
 <a href="/impressum.html">Impressum</a> ·
       <a href="/datenschutz.html">Datenschutz</a>
-<a aria-label="Instagram" class="footer-social-link" href="#" title="Instagram"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></a><a aria-label="Facebook" class="footer-social-link" href="#" title="Facebook"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.75l.41-3H13.5V9.08c0-.87.24-1.46 1.58-1.46H16.8V4.94a22.7 22.7 0 0 0-2.46-.13c-2.43 0-4.09 1.48-4.09 4.2V11H7.5v3h2.75v8h3.25Z"></path></svg></a></div>
+<a aria-label="Instagram" class="footer-social-link" href="https://www.instagram.com/melkendorffeiert/" rel="noopener noreferrer" target="_blank" title="Instagram"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.25 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></a><a aria-label="Facebook" class="footer-social-link" href="https://www.facebook.com/share/1CT2fnmQJu/" rel="noopener noreferrer" target="_blank" title="Facebook"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M13.5 22v-8h2.75l.41-3H13.5V9.08c0-.87.24-1.46 1.58-1.46H16.8V4.94a22.7 22.7 0 0 0-2.46-.13c-2.43 0-4.09 1.48-4.09 4.2V11H7.5v3h2.75v8h3.25Z"></path></svg></a></div>
 </div>
 </footer>
 <!-- Cloudflare Web Analytics -->
@@ -774,7 +774,7 @@ window.melkendorfTurnstileError = function(errorCode) {
   const label = document.getElementById('turnstileDiagnosticText');
   if (diag && label) {
     const code = String(errorCode || 'unbekannt');
-    let advice = 'Bitte versuche es erneut. Wenn das nicht klappt, probiere den Browser ohne Werbeblocker oder nutze den alternativen HiDrive-Upload.';
+    let advice = 'Bitte versuche es erneut. Falls nötig, deaktiviere testweise deinen Werbeblocker.';
     if (code.startsWith('110200')) advice = 'Die Website-Adresse ist noch nicht für das Cloudflare-Turnstile-Widget freigegeben. Bitte 750-jahre-melkendorf.de in Turnstile → Settings → Hostname Management prüfen.';
     else if (code.startsWith('110100') || code.startsWith('110110') || code.startsWith('400020')) advice = 'Der öffentliche Turnstile Site Key ist nicht gültig oder wird nicht gefunden. Bitte den Site Key im Cloudflare-Dashboard prüfen.';
     else if (code.startsWith('200500')) advice = 'Der Browser konnte den Cloudflare-Prüfrahmen nicht laden. Bitte Schutz-Erweiterungen und Blockierungen von challenges.cloudflare.com prüfen.';
@@ -1055,7 +1055,7 @@ form.addEventListener('submit',async event => {
       ...mapped.map(({file,entryName})=>`- ${entryName} (${file.size} Byte)`),
       '', 'HINWEIS',
       'Dieser Datensatz und die beiliegenden Dateien sind zur internen Prüfung bestimmt. Keine automatische Veröffentlichung.',
-      'Dieses Archivpaket wurde lokal im Browser erstellt und muss noch über den HiDrive-Dateianfrage-Link hochgeladen werden.',
+      'Dieses Archivpaket wurde lokal im Browser erstellt und zur Einreichung vorbereitet.',
       ''
     ].join('\r\n');
     const stamp=now.getTime();
@@ -1086,7 +1086,7 @@ form.addEventListener('submit',async event => {
     } else {
       status.textContent='Dein Beitrag wird direkt zu HiDrive übertragen. Bitte diese Seite offen lassen …';
       button.textContent='Beitrag wird hochgeladen …';
-      let errorReason='Der direkte Upload konnte nicht bestätigt werden. Bitte nutze den alternativen Weg.';
+      let errorReason='Der direkte Upload konnte nicht bestätigt werden. Bitte versuche es erneut.';
       const aborter = new AbortController();
       const timer = setTimeout(() => aborter.abort(), 180000);
       try {
@@ -1110,14 +1110,14 @@ form.addEventListener('submit',async event => {
           successPanel.scrollIntoView({behavior:'smooth',block:'center'});
           return;
         }
-        if (typeof reply.error === 'string') errorReason=reply.error + ' Alternativ kannst du die ZIP-Datei manuell hochladen.';
+        if (typeof reply.error === 'string') errorReason=reply.error + ' Bitte versuche es erneut.';
       } catch (_) {
-        errorReason='Die Verbindung wurde unterbrochen oder der Upload konnte nicht bestätigt werden. Nutze bei Bedarf die Alternative über HiDrive.';
+        errorReason='Die Verbindung wurde unterbrochen oder der Upload konnte nicht bestätigt werden. Bitte versuche es erneut.';
       } finally {
         clearTimeout(timer);
         try { window.turnstile?.reset?.(); } catch (_) {}
       }
-      showManual(errorReason);
+      status.textContent=errorReason;
     }
   } catch (err) {
     status.textContent='Die Datei konnte nicht vorbereitet werden. Bitte versuche es erneut oder wähle weniger Fotos aus.';
