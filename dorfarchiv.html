@@ -508,8 +508,29 @@ body{overflow-x:clip}
 .archive-help summary{cursor:pointer;color:#1e3d1e;font-weight:800}
 .archive-help p{margin:12px 0 0;line-height:1.6}
 @media(max-width:767px){.archive-final-steps{padding-left:20px}.archive-ready-actions{display:flex;flex-direction:column}.archive-ready-actions .btn{width:100%;text-align:center;justify-content:center}}
+
+/* Dorfarchiv: Direkte Einreichung mit größenabhängiger Alternative */
+[hidden] { display:none !important; }
+.archive-large-upload-notice{padding:14px 18px;margin:14px 0;background:#fff5df;color:#61470f;border:1px solid #d9ad49;border-radius:14px;line-height:1.55}
+
+.archive-security{margin:20px 0;padding:18px;border-radius:16px;background:#f2f6ec;border:1px solid rgba(30,61,30,.15)}
+.archive-security strong{display:block;color:#1e3d1e;margin-bottom:6px;font-size:1rem}
+.archive-security p{font-size:.91rem;color:#53634d;margin:0 0 15px;line-height:1.5}
+.archive-security .cf-turnstile{max-width:100%;min-width:0}
+.archive-success{border-color:#51733a;background:#f4f8ed}
+.archive-success h3{color:#1e3d1e}
+.submit-row{flex-wrap:wrap}
+#manualArchive{font-size:.92rem}
+@media(max-width:480px){.submit-row button{width:100%}}
+/* Die Kontaktüberschrift muss beide Spalten der Formular-Grids einnehmen */
+.form-grid > .form-contact-header {grid-column:1 / -1;min-width:0;width:100%}
+.form-grid > .form-contact-header .form-section-title {margin:18px 0 10px}
+.turnstile-diagnostic {margin-top:13px;padding:13px 15px;border:1px solid #cc9876;background:#fff8f0;color:#65331d;border-radius:12px;line-height:1.5;overflow-wrap:anywhere}
+.turnstile-diagnostic p{margin:0 0 9px;color:inherit}
+.turnstile-diagnostic strong{color:inherit}
+.turnstile-diagnostic button{cursor:pointer;min-height:38px;background:#fff;color:#1e3d1e;border:1px solid #51733a;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700}
 </style>
-<meta content="v8-2026-10-15" name="melkendorf-dorfarchiv-version"/></head>
+<meta content="v10-turnstile-diagnose-2026-10-15" name="melkendorf-dorfarchiv-version"/></head>
 <body>
 <header class="site-header">
 <div class="container nav-wrap">
@@ -544,7 +565,7 @@ body{overflow-x:clip}
 <h3>So läuft die Einreichung ab</h3>
 <div class="process">
 <div class="process-step"><b>1</b><div><strong>Angaben machen</strong><span>Art, Zeitraum, Thema, Ort, Beschreibung und Kontaktdaten angeben.</span></div></div>
-<div class="process-step"><b>2</b><div><strong>Dateien hochladen</strong><span>Aus Angaben und ausgewählten Dateien ein Archivpaket erstellen und bei HiDrive hochladen.</span></div></div>
+<div class="process-step"><b>2</b><div><strong>Beitrag direkt einreichen</strong><span>Nach der Sicherheitsprüfung überträgt das Formular alle Angaben und Dateien direkt in die Cloud.</span></div></div>
 <div class="process-step"><b>3</b><div><strong>Prüfung</strong><span>Der Festausschuss prüft jede Einreichung vertraulich.</span></div></div>
 <div class="process-step"><b>4</b><div><strong>Archiv</strong><span>Geeignete Inhalte können nach Freigabe später veröffentlicht werden.</span></div></div>
 </div>
@@ -565,8 +586,8 @@ body{overflow-x:clip}
 </div>
 <div class="form-card" id="einreichen">
 <p class="eyebrow">Einreichungsformular</p>
-<h2>Beitrag zum Dorfarchiv einreichen</h2><p aria-label="Versionsstand des Einreichungsformulars" class="archive-version">Einreichung über IONOS HiDrive Next · Formularstand 15.10.2026</p>
-<p class="form-simple-intro">Erzähle uns von deinem Beitrag und ergänze deine Kontaktdaten. Das dauert nur wenige Minuten. Danach zeigen wir dir ganz genau, wie du ihn sicher übermittelst.</p>
+<h2>Beitrag zum Dorfarchiv einreichen</h2><p aria-label="Versionsstand des Einreichungsformulars" class="archive-version">Direkte Einreichung über IONOS HiDrive Next</p>
+<p class="form-simple-intro">Erzähle uns von deinem Beitrag und ergänze deine Kontaktdaten. Nach der Sicherheitsprüfung wird dein Beitrag direkt übermittelt. Für größere Dateien erscheint automatisch die alternative Einreichung über IONOS HiDrive.</p>
 <form id="archiveForm" novalidate="">
 <h3 class="form-section-title">1. Deine Erinnerung</h3>
 <div class="field full">
@@ -672,29 +693,40 @@ body{overflow-x:clip}
 <div class="archive-handoff-heading">
 <span aria-hidden="true" class="archive-handoff-icon">☁</span>
 <div>
-<strong>Fast geschafft: So kommt dein Beitrag zu uns</strong>
-<p>Wir bündeln deine Angaben und Bilder in einer einzigen Datei. Danach musst du sie nur noch bei IONOS hochladen.</p>
+<strong>Einfach mit einem Klick einreichen</strong>
+<p>Deine Angaben und Fotos werden direkt und gemeinsam an HiDrive übertragen. Du brauchst keine ZIP-Datei herunterzuladen.</p>
 </div>
 </div>
 <div class="archive-handoff-steps">
 <div class="archive-handoff-step">
 <span class="archive-step-number">1</span>
-<div><strong>Beitrag vorbereiten</strong><p>Klicke unten auf „Beitrag vorbereiten“. Dein Gerät lädt eine ZIP-Datei mit allen Angaben und gegebenenfalls Fotos herunter.</p></div>
+<div><strong>Angaben prüfen</strong><p>Fülle das Formular aus, wähle gegebenenfalls deine Fotos und bestätige die Sicherheitsprüfung.</p></div>
 </div>
 <div class="archive-handoff-step">
 <span class="archive-step-number">2</span>
-<div><strong>Datei sicher versenden</strong><p>Öffne über die nächste Schaltfläche den IONOS-Upload und wähle dort die heruntergeladene Datei aus. Erst damit ist sie an uns übermittelt.</p></div>
+<div><strong>Direkt absenden</strong><p>Klicke auf „Beitrag direkt einreichen“. Die Bestätigung erscheint hier, sobald HiDrive den Upload angenommen hat.</p></div>
 </div>
 </div>
-<p class="archive-local-note">Das ZIP wird lokal im Browser erstellt. Während der Vorbereitung werden keine Dateien an uns oder an einen externen Dienst gesendet.</p>
+<p class="archive-local-note">Bis du absendest, bleiben deine ausgewählten Dateien auf deinem Gerät.</p>
 </div>
+<div class="archive-security" id="archiveSecurity">
+<strong>Spamschutz</strong>
+<p>Bitte schließe die Sicherheitsprüfung ab, damit wir deinen Beitrag direkt entgegennehmen können.</p>
+<div id="archiveTurnstile" class="cf-turnstile" data-sitekey="0x4AAAAAAFX2TPP4qQjRH3lg" data-action="dorfarchiv_upload" data-size="flexible" data-error-callback="melkendorfTurnstileError" data-callback="melkendorfTurnstileSolved" data-expired-callback="melkendorfTurnstileExpired"></div>
+<div id="turnstileDiagnostic" class="turnstile-diagnostic" role="alert" hidden>
+  <p id="turnstileDiagnosticText"></p>
+  <button type="button" id="turnstileRetry">Sicherheitsprüfung erneut versuchen</button>
+</div>
+</div>
+<p id="largeUploadNotice" class="archive-large-upload-notice" hidden>Deine ausgewählten Dateien sind für die direkte Einreichung zu groß (ab 38 MB). Du kannst sie trotzdem über unseren sicheren HiDrive-Upload einreichen – ohne etwas aus dem Formular zu verlieren.</p>
 <div class="submit-row">
-<button class="btn" id="createArchiveBundle" type="submit">Beitrag vorbereiten ↓</button>
+<button class="btn" id="createArchiveBundle" type="submit">Beitrag direkt einreichen ↑</button>
+<button class="btn btn-secondary" id="manualArchive" type="button" hidden>Große Dateien über HiDrive einreichen ↓</button>
 <span aria-live="polite" class="status" id="status" role="status"></span>
 </div><div class="archive-ready" hidden="" id="archiveReady">
-<div class="archive-ready-badge"><span aria-hidden="true">✓</span> Dein Beitrag ist vorbereitet</div>
-<h3>Nur noch ein Schritt: Datei hochladen</h3>
-<p>Dein Beitrag wurde als <strong id="bundleFilename"></strong> heruntergeladen. Öffne jetzt den Upload und wähle dort genau diese Datei aus.</p>
+<div class="archive-ready-badge"><span aria-hidden="true">↓</span> Alternativer Upload</div>
+<h3>Beitrag alternativ bei IONOS hochladen</h3>
+<p>Für den manuellen Upload wurde <strong id="bundleFilename"></strong> vorbereitet. Lade diese ZIP-Datei herunter und wähle sie anschließend auf der IONOS-Seite aus.</p>
 <ol class="archive-final-steps">
 <li><strong>Auf „IONOS-Upload öffnen“ klicken.</strong> Es öffnet sich ein neuer Tab.</li>
 <li><strong>Die heruntergeladene Datei auswählen.</strong> Du findest sie meistens im Ordner „Downloads“ deines Geräts.</li>
@@ -706,7 +738,13 @@ body{overflow-x:clip}
 </div>
 <details class="archive-help"><summary>Wo finde ich meine heruntergeladene Datei?</summary><p>Am PC meist unter „Downloads“, auf Android unter „Downloads“ bzw. in der Dateien-App und auf dem iPhone unter „Dateien → Downloads“. Die Datei endet auf <strong>.zip</strong>. Bitte nicht entpacken, sondern genau so hochladen.</p></details>
 
-<p class="archive-warning"><strong>Noch nicht abgeschickt:</strong> Die Vorbereitung auf dieser Website allein sendet nichts an uns. Bitte schließe unbedingt den Upload auf der IONOS-Seite ab.</p>
+<p class="archive-warning"><strong>Hinweis:</strong> Wenn du diese Alternative nutzt, gilt dein Beitrag erst nach dem erfolgreichen Upload auf der IONOS-Seite als eingereicht.</p>
+</div>
+<div class="archive-ready archive-success" id="directSuccess" hidden>
+<div class="archive-ready-badge"><span aria-hidden="true">✓</span> Erfolgreich eingereicht</div>
+<h3>Vielen Dank! Dein Beitrag ist bei uns angekommen.</h3>
+<p>HiDrive hat deinen Beitrag erfolgreich angenommen. Wir prüfen die eingesendeten Inhalte, bevor etwas veröffentlicht wird. Ein weiterer Upload ist nicht nötig.</p>
+
 </div>
 </form>
 </div>
@@ -727,15 +765,80 @@ body{overflow-x:clip}
 </footer>
 <!-- Cloudflare Web Analytics -->
 <script data-cf-beacon='{"token":"998d56353c3848cbbf44826972b6600f"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script>
-<!-- End Cloudflare Web Analytics --><script>(() => {
+<!-- End Cloudflare Web Analytics -->
+<script>
+/* Hilft, Turnstile-Konfigurations- und Verbindungsfehler sichtbar zu machen. */
+window.melkendorfTurnstileError = function(errorCode) {
+  const diag = document.getElementById('turnstileDiagnostic');
+  const label = document.getElementById('turnstileDiagnosticText');
+  if (diag && label) {
+    const code = String(errorCode || 'unbekannt');
+    let advice = 'Bitte versuche es erneut. Falls nötig, deaktiviere testweise deinen Werbeblocker.';
+    if (code.startsWith('110200')) advice = 'Die Website-Adresse ist noch nicht für das Cloudflare-Turnstile-Widget freigegeben. Bitte 750-jahre-melkendorf.de in Turnstile → Settings → Hostname Management prüfen.';
+    else if (code.startsWith('110100') || code.startsWith('110110') || code.startsWith('400020')) advice = 'Der öffentliche Turnstile Site Key ist nicht gültig oder wird nicht gefunden. Bitte den Site Key im Cloudflare-Dashboard prüfen.';
+    else if (code.startsWith('200500')) advice = 'Der Browser konnte den Cloudflare-Prüfrahmen nicht laden. Bitte Schutz-Erweiterungen und Blockierungen von challenges.cloudflare.com prüfen.';
+    label.textContent = 'Cloudflare-Sicherheitsprüfung fehlgeschlagen (Fehlercode ' + code + '). ' + advice;
+    diag.hidden = false;
+  }
+  console.warn('Melkendorf Turnstile Fehlercode:', errorCode);
+  return true;
+};
+window.melkendorfTurnstileSolved = function() {
+  const diag = document.getElementById('turnstileDiagnostic');
+  if (diag) diag.hidden = true;
+};
+window.melkendorfTurnstileExpired = function() {
+  const diag = document.getElementById('turnstileDiagnostic');
+  const label = document.getElementById('turnstileDiagnosticText');
+  if (diag && label) {
+    label.textContent = 'Die Sicherheitsprüfung ist abgelaufen. Bitte auf „Sicherheitsprüfung erneut versuchen“ klicken.';
+    diag.hidden = false;
+  }
+};
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>(() => {
 'use strict';
 const form = document.getElementById('archiveForm');
 const period = document.getElementById('period');
 const unknown = document.getElementById('periodUnknown');
 const status = document.getElementById('status');
+document.getElementById('turnstileRetry')?.addEventListener('click', () => {
+  const diag = document.getElementById('turnstileDiagnostic');
+  if (diag) diag.hidden = true;
+  if (window.turnstile?.reset) {
+    try { window.turnstile.reset('#archiveTurnstile'); }
+    catch (_) { window.location.reload(); }
+  } else {
+    window.location.reload();
+  }
+});
 const button = document.getElementById('createArchiveBundle');
 const ready = document.getElementById('archiveReady');
 const downloadLink = document.getElementById('downloadBundle');
+const successPanel = document.getElementById('directSuccess');
+const manualButton = document.getElementById('manualArchive');
+let manualOnce = false;
+const securityBox = document.getElementById('archiveSecurity');
+const largeUploadNotice = document.getElementById('largeUploadNotice');
+const MAX_DIRECT_BYTES = 38 * 1024 * 1024;
+function updateUploadMode() {
+  const fileSize = [...document.getElementById('files').files].reduce((sum, f) => sum + f.size, 0);
+  const tooLarge = fileSize >= MAX_DIRECT_BYTES;
+  const directButton = document.getElementById('createArchiveBundle');
+  manualButton.hidden = !tooLarge;
+  directButton.hidden = tooLarge;
+  securityBox.hidden = tooLarge;
+  largeUploadNotice.hidden = !tooLarge;
+  if (tooLarge) {
+    status.textContent = '';
+  }
+}
+const UPLOAD_ENDPOINT = 'https://melkendorf-dorfarchiv-upload.crimson-art-bc11.workers.dev/api/upload';
+manualButton.addEventListener('click', () => {
+  manualOnce = true;
+  form.requestSubmit();
+});
 const filesInput = document.getElementById('files');
 const fileSelection = document.getElementById('fileSelection');
 const describeFiles = () => {
@@ -745,7 +848,9 @@ const describeFiles = () => {
   fileSelection.textContent = fs.length ? `${fs.length} Datei${fs.length===1?'':'en'} ausgewählt (zusammen ${mb} MB)` : 'Noch keine Dateien ausgewählt.';
 };
 filesInput.addEventListener('change', describeFiles);
+filesInput.addEventListener('change', updateUploadMode);
 describeFiles();
+updateUploadMode();
 let currentObjectUrl = null;
 let busy = false;
 const MAX_TOTAL_BYTES = 1.5 * 1024 * 1024 * 1024; // conservative browser limit; ZIP32 below 4GB
@@ -873,10 +978,11 @@ function refId() {
   return `MEL-${stamp}-${code}`;
 }
 function invalidateBundle() {
-  if (busy || ready.hidden) return;
+  if (busy || (ready.hidden && successPanel.hidden)) return;
   ready.hidden = true;
+  successPanel.hidden = true;
   if (currentObjectUrl) {URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=null;}
-  status.textContent='Deine Angaben wurden geändert. Bitte bereite den Beitrag erneut vor.';
+  status.textContent='Deine Angaben wurden geändert. Bitte reiche den Beitrag erneut ein.';
 }
 form.addEventListener('input',invalidateBundle);
 form.addEventListener('change',invalidateBundle);
@@ -884,7 +990,10 @@ window.addEventListener('beforeunload',()=>{if(currentObjectUrl) URL.revokeObjec
 form.addEventListener('submit',async event => {
   event.preventDefault();
   if (busy) return;
+  const manualMode = manualOnce;
+  manualOnce = false;
   ready.hidden = true;
+  successPanel.hidden = true;
   if (currentObjectUrl) {URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=null;}
   status.textContent='';
   const chosen = [...document.querySelectorAll('input[name="thema"]:checked')].map(el=>el.value);
@@ -895,7 +1004,14 @@ form.addEventListener('submit',async event => {
   const totalBytes=files.reduce((n,f)=>n+f.size,0);
   if (totalBytes>MAX_TOTAL_BYTES) {status.textContent='Diese Sammlung ist für die Verarbeitung im Browser zu groß (über 1,5 GB). Bitte wähle zunächst weniger Dateien.';return;}
   if (files.some(f=>f.size >= 0xFFFFFFFF)) {status.textContent='Eine Datei ist zu groß für dieses ZIP-Format.';return;}
-  busy=true;button.disabled=true;button.textContent='Beitrag wird vorbereitet …';
+  const directMode = !manualMode && totalBytes < MAX_DIRECT_BYTES;
+  const challengeToken = directMode ? (window.turnstile?.getResponse?.() || '') : '';
+  if (directMode && !challengeToken) {
+    status.textContent='Bitte schließe zuerst die Sicherheitsprüfung ab.';
+    document.getElementById('archiveTurnstile').scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  busy=true;button.disabled=true;manualButton.disabled=true;button.textContent=directMode?'Beitrag wird vorbereitet …':'ZIP-Datei wird vorbereitet …';
   try {
     const id=refId();
     const now = new Date();
@@ -938,7 +1054,7 @@ form.addEventListener('submit',async event => {
       ...mapped.map(({file,entryName})=>`- ${entryName} (${file.size} Byte)`),
       '', 'HINWEIS',
       'Dieser Datensatz und die beiliegenden Dateien sind zur internen Prüfung bestimmt. Keine automatische Veröffentlichung.',
-      'Dieses Archivpaket wurde lokal im Browser erstellt und muss noch über den HiDrive-Dateianfrage-Link hochgeladen werden.',
+      'Dieses Archivpaket wurde lokal im Browser erstellt und zur Einreichung vorbereitet.',
       ''
     ].join('\r\n');
     const stamp=now.getTime();
@@ -959,15 +1075,53 @@ form.addEventListener('submit',async event => {
     downloadLink.download=filename;
     document.getElementById('bundleFilename').textContent=filename;
     
-    ready.hidden=false;
-    status.textContent='Dein Beitrag ist vorbereitet. Jetzt bitte die Datei bei IONOS hochladen.';
-    // Trigger download from the initiated submit action; permanent manual fallback remains.
-    downloadLink.click();
-    ready.scrollIntoView({behavior:'smooth',block:'center'});
+    const showManual = (reason) => {
+      ready.hidden=false;
+      status.textContent=reason;
+      ready.scrollIntoView({behavior:'smooth',block:'center'});
+    };
+    if (!directMode || bundle.size > MAX_DIRECT_BYTES) {
+      showManual('Dein Beitrag ist vorbereitet. Bitte lade die ZIP-Datei herunter und anschließend bei IONOS hoch.');
+    } else {
+      status.textContent='Dein Beitrag wird direkt zu HiDrive übertragen. Bitte diese Seite offen lassen …';
+      button.textContent='Beitrag wird hochgeladen …';
+      let errorReason='Der direkte Upload konnte nicht bestätigt werden. Bitte versuche es erneut.';
+      const aborter = new AbortController();
+      const timer = setTimeout(() => aborter.abort(), 180000);
+      try {
+        const response = await fetch(UPLOAD_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/zip',
+            'X-Archive-ID': id,
+            'X-Turnstile-Token': challengeToken
+          },
+          body: bundle,
+          mode: 'cors',
+          cache: 'no-store',
+          signal: aborter.signal
+        });
+        const reply = await response.json().catch(() => ({}));
+        if (response.status === 201 && reply.ok === true && reply.reference === id) {
+          successPanel.hidden=false;
+          
+          status.textContent='Erfolgreich übermittelt! HiDrive hat deinen Beitrag angenommen.';
+          successPanel.scrollIntoView({behavior:'smooth',block:'center'});
+          return;
+        }
+        if (typeof reply.error === 'string') errorReason=reply.error + ' Bitte versuche es erneut.';
+      } catch (_) {
+        errorReason='Die Verbindung wurde unterbrochen oder der Upload konnte nicht bestätigt werden. Bitte versuche es erneut.';
+      } finally {
+        clearTimeout(timer);
+        try { window.turnstile?.reset?.(); } catch (_) {}
+      }
+      status.textContent=errorReason;
+    }
   } catch (err) {
     status.textContent='Die Datei konnte nicht vorbereitet werden. Bitte versuche es erneut oder wähle weniger Fotos aus.';
     console.error('Dorfarchiv-Paket konnte nicht erstellt werden',err);
-  } finally {busy=false;button.disabled=false;button.textContent='Beitrag vorbereiten ↓';}
+  } finally {busy=false;button.disabled=false;manualButton.disabled=false;button.textContent='Beitrag direkt einreichen ↑';}
 });
 })();</script></body>
 </html>
