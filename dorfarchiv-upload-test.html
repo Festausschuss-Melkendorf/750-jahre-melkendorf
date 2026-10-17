@@ -511,6 +511,9 @@ body{overflow-x:clip}
 @media(max-width:767px){.archive-final-steps{padding-left:20px}.archive-ready-actions{display:flex;flex-direction:column}.archive-ready-actions .btn{width:100%;text-align:center;justify-content:center}}
 
 /* Nur Dorfarchiv Upload-Test: direkte Einreichung */
+[hidden] { display:none !important; }
+.archive-large-upload-notice{padding:14px 18px;margin:14px 0;background:#fff5df;color:#61470f;border:1px solid #d9ad49;border-radius:14px;line-height:1.55}
+
 .archive-security{margin:20px 0;padding:18px;border-radius:16px;background:#f2f6ec;border:1px solid rgba(30,61,30,.15)}
 .archive-security strong{display:block;color:#1e3d1e;margin-bottom:6px;font-size:1rem}
 .archive-security p{font-size:.91rem;color:#53634d;margin:0 0 15px;line-height:1.5}
@@ -707,7 +710,7 @@ body{overflow-x:clip}
 </div>
 <p class="archive-local-note">Bis du absendest, bleiben deine ausgewählten Dateien auf deinem Gerät. Für größere Sammlungen (über ca. 38 MB) kannst du den bisherigen HiDrive-Upload nutzen.</p>
 </div>
-<div class="archive-security">
+<div class="archive-security" id="archiveSecurity">
 <strong>Spamschutz</strong>
 <p>Bitte schließe die Sicherheitsprüfung ab, damit wir deinen Beitrag direkt entgegennehmen können.</p>
 <div id="archiveTurnstile" class="cf-turnstile" data-sitekey="0x4AAAAAAFX2TPP4qQjRH3lg" data-action="dorfarchiv_upload" data-size="flexible" data-error-callback="melkendorfTurnstileError" data-callback="melkendorfTurnstileSolved" data-expired-callback="melkendorfTurnstileExpired"></div>
@@ -716,9 +719,10 @@ body{overflow-x:clip}
   <button type="button" id="turnstileRetry">Sicherheitsprüfung erneut versuchen</button>
 </div>
 </div>
+<p id="largeUploadNotice" class="archive-large-upload-notice" hidden>Deine ausgewählten Dateien sind für die direkte Einreichung zu groß (über 38 MB). Du kannst sie trotzdem über unseren sicheren HiDrive-Upload einreichen – ohne etwas aus dem Formular zu verlieren.</p>
 <div class="submit-row">
 <button class="btn" id="createArchiveBundle" type="submit">Beitrag direkt einreichen ↑</button>
-<button class="btn btn-secondary" id="manualArchive" type="button">Alternativ über HiDrive hochladen</button>
+<button class="btn btn-secondary" id="manualArchive" type="button" hidden>Große Dateien über HiDrive einreichen ↓</button>
 <span aria-live="polite" class="status" id="status" role="status"></span>
 </div><div class="archive-ready" hidden="" id="archiveReady">
 <div class="archive-ready-badge"><span aria-hidden="true">↓</span> Alternativer Upload</div>
@@ -816,8 +820,22 @@ const downloadLink = document.getElementById('downloadBundle');
 const successPanel = document.getElementById('directSuccess');
 const manualButton = document.getElementById('manualArchive');
 let manualOnce = false;
-const UPLOAD_ENDPOINT = 'https://melkendorf-dorfarchiv-upload.crimson-art-bc11.workers.dev/api/upload';
+const securityBox = document.getElementById('archiveSecurity');
+const largeUploadNotice = document.getElementById('largeUploadNotice');
 const MAX_DIRECT_BYTES = 38 * 1024 * 1024;
+function updateUploadMode() {
+  const fileSize = [...document.getElementById('files').files].reduce((sum, f) => sum + f.size, 0);
+  const tooLarge = fileSize >= MAX_DIRECT_BYTES;
+  const directButton = document.getElementById('createArchiveBundle');
+  manualButton.hidden = !tooLarge;
+  directButton.hidden = tooLarge;
+  securityBox.hidden = tooLarge;
+  largeUploadNotice.hidden = !tooLarge;
+  if (tooLarge) {
+    status.textContent = '';
+  }
+}
+const UPLOAD_ENDPOINT = 'https://melkendorf-dorfarchiv-upload.crimson-art-bc11.workers.dev/api/upload';
 manualButton.addEventListener('click', () => {
   manualOnce = true;
   form.requestSubmit();
@@ -831,7 +849,9 @@ const describeFiles = () => {
   fileSelection.textContent = fs.length ? `${fs.length} Datei${fs.length===1?'':'en'} ausgewählt (zusammen ${mb} MB)` : 'Noch keine Dateien ausgewählt.';
 };
 filesInput.addEventListener('change', describeFiles);
+filesInput.addEventListener('change', updateUploadMode);
 describeFiles();
+updateUploadMode();
 let currentObjectUrl = null;
 let busy = false;
 const MAX_TOTAL_BYTES = 1.5 * 1024 * 1024 * 1024; // conservative browser limit; ZIP32 below 4GB
@@ -988,7 +1008,7 @@ form.addEventListener('submit',async event => {
   const directMode = !manualMode && totalBytes < MAX_DIRECT_BYTES;
   const challengeToken = directMode ? (window.turnstile?.getResponse?.() || '') : '';
   if (directMode && !challengeToken) {
-    status.textContent='Bitte schließe zuerst die Sicherheitsprüfung ab. Falls sie nicht angezeigt wird, nutze die Alternative über HiDrive.';
+    status.textContent='Bitte schließe zuerst die Sicherheitsprüfung ab.';
     document.getElementById('archiveTurnstile').scrollIntoView({behavior:'smooth',block:'center'});
     return;
   }
